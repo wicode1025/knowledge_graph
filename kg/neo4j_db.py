@@ -248,3 +248,244 @@ def initialize_kg_schema():
             print(f"Error creating index: {e}")
 
     return True
+
+
+# ==================== FCM标签导出函数 ====================
+
+def export_fcm_labels_to_neo4j():
+    """
+    导出FCM标签到Neo4j
+    创建新的四级标签体系节点和关系
+
+    优化项（基于学术审视报告）：
+    1. 保留完整隶属度向量
+    2. 边界用户显式标记
+    3. 隶属度熵
+    4. 创建用户-标签关系
+    """
+    import pymysql
+    import json
+
+    # 数据库配置
+    DB_CONFIG = {
+        'host': 'localhost',
+        'user': 'root',
+        'password': '20031025wly',
+        'charset': 'utf8mb4',
+        'database': 'electric_user_profile'
+    }
+
+    conn = pymysql.connect(**DB_CONFIG)
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+
+    # 获取所有FCM标签
+    cursor.execute("SELECT * FROM user_fcm_tags")
+    tags = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    if not tags:
+        print("没有FCM标签数据")
+        return {'status': 'error', 'message': 'No FCM tags found'}
+
+    # 1. 创建一级标签节点 (能耗等级)
+    level1_tags = ['JNF', 'PTH', 'BDY', 'GNH', 'DDX']
+    level1_display = {
+        'JNF': '节能型', 'PTH': '普通型', 'BDY': '摆渡型',
+        'GNH': '高耗能型', 'DDX': '待定'
+    }
+
+    for tag in level1_tags:
+        query = """
+        MERGE (l1:FCMTagLevel1 {code: $code})
+        SET l1.name = $name,
+            l1.category = 'energy_level'
+        """
+        neo4j_conn.execute_query(query, {
+            'code': tag,
+            'name': level1_display.get(tag, tag)
+        })
+
+    # 2. 创建二级标签节点 (行为特征)
+    level2_tags = ['WD', 'BD', 'JG', 'ZQ']
+    level2_display = {
+        'WD': '稳定型', 'BD': '波动型',
+        'JG': '间歇型', 'ZQ': '周期型'
+    }
+
+    for tag in level2_tags:
+        query = """
+        MERGE (l2:FCMTagLevel2 {code: $code})
+        SET l2.name = $name,
+            l2.category = 'behavior'
+        """
+        neo4j_conn.execute_query(query, {
+            'code': tag,
+            'name': level2_display.get(tag, tag)
+        })
+
+    # 3. 创建三级标签节点 (能耗模式特征)
+    level3_tags = ['ZG', 'YE', 'QY']
+    level3_display = {'ZG': '昼间均衡型', 'YE': '夜间波动型', 'QY': '全天候混合型'}
+
+    for tag in level3_tags:
+        query = """
+        MERGE (l3:FCMTagLevel3 {code: $code})
+        SET l3.name = $name,
+            l3.category = 'energy_pattern'
+        """
+        neo4j_conn.execute_query(query, {
+            'code': tag,
+            'name': level3_display.get(tag, tag)
+        })
+
+    # 4. 创建四级标签节点 (服务价值)
+    level4_tags = ['GJX', 'ZJZ', 'DJZ', 'FXY']
+    level4_display = {
+        'GJX': '高价值用户',
+        'ZJZ': '中价值用户',
+        'DJZ': '低价值用户',
+        'FXY': '风险用户'
+    }
+
+    for tag in level4_tags:
+        query = """
+        MERGE (l4:FCMTagLevel4 {code: $code})
+        SET l4.name = $name,
+            l4.category = 'business'
+        """
+        neo4j_conn.execute_query(query, {
+            'code': tag,
+            'name': level4_display.get(tag, tag)
+        })
+
+    # 5. 更新用户节点，添加完整FCM标签属性
+    # 并创建用户-标签关系
+    exported_count = 0
+    for row in tags:
+        user_id = str(row['user_id'])
+        level1 = str(row['level1'])
+        level2 = str(row['level2'])
+        level3 = str(row['level3'])
+        level4 = str(row['level4'])
+
+        # 解析完整隶属度向量
+        membership_vector = {}
+        if row['membership_json']:
+            try:
+                membership_vector = json.loads(row['membership_json'])
+            except:
+                membership_vector = {}
+
+        # 计算边界标记：max - min < 0.5 为边界用户
+        membership_diff = float(row['membership_diff']) if row['membership_diff'] else 0
+        boundary_flag = membership_diff < 0.5
+
+        # 熵值
+        entropy = float(row['entropy']) if row['entropy'] else 0
+
+        # 更新用户节点属性（增强版）
+        update_query = """
+        MATCH (u:User {user_id: $user_id})
+        SET u.fcm_level1 = $level1,
+            u.fcm_level2 = $level2,
+            u.fcm_level3 = $level3,
+            u.fcm_level4 = $level4,
+            u.fcm_combined = $combined,
+            u.fcm_cluster = $cluster_id,
+            u.fcm_membership_max = $membership_max,
+            u.fcm_membership_min = $membership_min,
+            u.fcm_membership_diff = $membership_diff,
+            u.fcm_boundary_flag = $boundary_flag,
+            u.fcm_entropy = $entropy,
+            u.fcm_membership_vector = $membership_vector
+        """
+        try:
+            neo4j_conn.execute_query(update_query, {
+                'user_id': user_id,
+                'level1': level1,
+                'level2': level2,
+                'level3': level3,
+                'level4': level4,
+                'combined': str(row['combined_tag']),
+                'cluster_id': int(row['cluster_id']),
+                'membership_max': float(row['membership_max']),
+                'membership_min': float(row['membership_min']) if row['membership_min'] else 0,
+                'membership_diff': membership_diff,
+                'boundary_flag': boundary_flag,
+                'entropy': entropy,
+                'membership_vector': json.dumps(membership_vector)
+            })
+
+            # 创建用户-标签关系（替代属性连接）
+            # 关系1: 用户 -> 能耗等级
+            if level1 != 'DDX':  # DDX不建立稳定关系
+                rel_query1 = f"""
+                MATCH (u:User {{user_id: $user_id}})
+                MATCH (l1:FCMTagLevel1 {{code: $level1}})
+                MERGE (u)-[r:HAS_LEVEL1]->(l1)
+                SET r.membership = $membership_max,
+                    r.is_primary = true,
+                    r.is_boundary = $boundary_flag
+                """
+                neo4j_conn.execute_query(rel_query1, {
+                    'user_id': user_id,
+                    'level1': level1,
+                    'membership_max': float(row['membership_max']),
+                    'boundary_flag': boundary_flag
+                })
+
+            # 关系2: 用户 -> 行为特征
+            rel_query2 = f"""
+            MATCH (u:User {{user_id: $user_id}})
+            MATCH (l2:FCMTagLevel2 {{code: $level2}})
+            MERGE (u)-[r:HAS_LEVEL2]->(l2)
+            SET r.membership = $membership_max
+            """
+            neo4j_conn.execute_query(rel_query2, {
+                'user_id': user_id,
+                'level2': level2,
+                'membership_max': float(row['membership_max'])
+            })
+
+            # 关系3: 用户 -> 能耗模式特征
+            rel_query3 = f"""
+            MATCH (u:User {{user_id: $user_id}})
+            MATCH (l3:FCMTagLevel3 {{code: $level3}})
+            MERGE (u)-[r:HAS_LEVEL3]->(l3)
+            SET r.membership = $membership_max
+            """
+            neo4j_conn.execute_query(rel_query3, {
+                'user_id': user_id,
+                'level3': level3,
+                'membership_max': float(row['membership_max'])
+            })
+
+            # 关系4: 用户 -> 服务价值
+            rel_query4 = f"""
+            MATCH (u:User {{user_id: $user_id}})
+            MATCH (l4:FCMTagLevel4 {{code: $level4}})
+            MERGE (u)-[r:HAS_LEVEL4]->(l4)
+            SET r.membership = $membership_max
+            """
+            neo4j_conn.execute_query(rel_query4, {
+                'user_id': user_id,
+                'level4': level4,
+                'membership_max': float(row['membership_max'])
+            })
+
+            exported_count += 1
+
+        except Exception as e:
+            print(f"Error updating user {user_id}: {e}")
+
+    print(f"FCM标签已导出到Neo4j: {exported_count} 用户")
+    print(f"  - 完整隶属度向量: 已保存")
+    print(f"  - 边界用户标记: 已设置")
+    print(f"  - 用户-标签关系: 已创建")
+
+    return {
+        'status': 'success',
+        'users': exported_count
+    }

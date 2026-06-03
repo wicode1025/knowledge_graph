@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j@idjwptkmuadyj%218(oj@%jrm1#pe++=li+k#najctfz2qed'
+SECRET_KEY = 'django-insecure-change-this-to-random-string-in-production'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,8 +76,15 @@ WSGI_APPLICATION = 'power_profile.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'electric_user_profile',
+        'USER': 'root',
+        'PASSWORD': 'your_mysql_password',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
     }
 }
 
@@ -119,11 +126,35 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # Neo4j Configuration
-NEO4J_CONFIG = {
-    'URI': 'bolt://localhost:7687',
-    'AUTH': ('neo4j', '20031025wly'),
-    'DATABASE': 'neo4j',
-}
+# 如果存在settings.local.py，从中读取配置，覆盖默认配置
+local_settings_path = BASE_DIR / 'power_profile' / 'settings.local.py'
+
+if local_settings_path.exists():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("local_settings", local_settings_path)
+    local_settings = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(local_settings)
+
+    # 使用本地配置覆盖
+    NEO4J_CONFIG = getattr(local_settings, 'NEO4J_CONFIG', {
+        'URI': 'bolt://localhost:7687',
+        'AUTH': ('neo4j', 'password'),
+        'DATABASE': 'neo4j',
+    })
+
+    # 覆盖 SECRET_KEY（如果本地配置中有）
+    if hasattr(local_settings, 'SECRET_KEY'):
+        SECRET_KEY = local_settings.SECRET_KEY
+
+    # 覆盖 DATABASES（如果本地配置中有）
+    if hasattr(local_settings, 'DATABASES'):
+        DATABASES = local_settings.DATABASES
+else:
+    NEO4J_CONFIG = {
+        'URI': 'bolt://localhost:7687',
+        'AUTH': ('neo4j', 'your_neo4j_password'),
+        'DATABASE': 'neo4j',
+    }
 
 # Data directory
 # 使用REFIT数据集
@@ -131,3 +162,8 @@ DATA_DIR = BASE_DIR / 'kg_refit_data'
 
 # 可选：原始数据目录
 ORIGINAL_DATA_DIR = BASE_DIR / 'processed_data'
+
+# JWT Configuration
+JWT_SECRET = 'your_jwt_secret_change_in_production'
+JWT_ALGORITHM = 'HS256'
+JWT_EXPIRATION_HOURS = 168  # 7 days

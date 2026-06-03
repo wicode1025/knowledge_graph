@@ -30,6 +30,7 @@ env/
 # Django
 *.log
 local_settings.py
+settings.local.py
 db.sqlite3
 media/
 staticfiles/
@@ -69,3 +70,11 @@ kg_refit_data/
 
 # 项目特定
 *.log
+*.bak
+*.pptx
+data/
+academic-paper-skills/
+docs/screenshots/
+docs/paper_figures/
+frontend/*.png
+frontend/test_kg.png
