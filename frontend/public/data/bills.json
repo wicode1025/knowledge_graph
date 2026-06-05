@@ -1,0 +1,396 @@
+{
+  "bills": [
+    {
+      "bill_id": "BILL_H0001_202601",
+      "household_id": "H0001",
+      "bill_month": "2026-01",
+      "total_kwh": 486.5,
+      "electricity_cost": 267.58,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 267.58,
+      "paid_amount": 267.58,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2026-02-15",
+      "paid_date": "2026-01-28",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 486.50 kWh × ¥0.55",
+          "amount": 267.58,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0001_202512",
+      "household_id": "H0001",
+      "bill_month": "2025-12",
+      "total_kwh": 512.3,
+      "electricity_cost": 281.77,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 281.77,
+      "paid_amount": 281.77,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2026-01-15",
+      "paid_date": "2026-01-05",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 512.30 kWh × ¥0.55",
+          "amount": 281.77,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0002_202601",
+      "household_id": "H0002",
+      "bill_month": "2026-01",
+      "total_kwh": 245.8,
+      "electricity_cost": 135.19,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 135.19,
+      "paid_amount": 0,
+      "status": 1,
+      "consecutive_unpaid_months": 1,
+      "warning_flag": 0,
+      "due_date": "2026-02-15",
+      "paid_date": null,
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 245.80 kWh × ¥0.55",
+          "amount": 135.19,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0002_202512",
+      "household_id": "H0002",
+      "bill_month": "2025-12",
+      "total_kwh": 230.5,
+      "electricity_cost": 126.78,
+      "unit_price": 0.55,
+      "repair_cost": 150.0,
+      "total_amount": 276.78,
+      "paid_amount": 0,
+      "status": 1,
+      "consecutive_unpaid_months": 2,
+      "warning_flag": 1,
+      "due_date": "2026-01-15",
+      "paid_date": null,
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 230.50 kWh × ¥0.55",
+          "amount": 126.78,
+          "ref_id": null
+        },
+        {
+          "item_type": 2,
+          "item_desc": "维修费 - 空调不制冷维修",
+          "amount": 150.0,
+          "ref_id": "REP_H0002_0001"
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0003_202601",
+      "household_id": "H0003",
+      "bill_month": "2026-01",
+      "total_kwh": 380.2,
+      "electricity_cost": 209.11,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 209.11,
+      "paid_amount": 209.11,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2026-02-15",
+      "paid_date": "2026-02-02",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 380.20 kWh × ¥0.55",
+          "amount": 209.11,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0003_202512",
+      "household_id": "H0003",
+      "bill_month": "2025-12",
+      "total_kwh": 395.6,
+      "electricity_cost": 217.58,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 217.58,
+      "paid_amount": 217.58,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2026-01-15",
+      "paid_date": "2026-01-08",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 395.60 kWh × ¥0.55",
+          "amount": 217.58,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0001_202508",
+      "household_id": "H0001",
+      "bill_month": "2025-08",
+      "total_kwh": 715.0,
+      "electricity_cost": 393.25,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 393.25,
+      "paid_amount": 393.25,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2025-09-15",
+      "paid_date": "2025-08-28",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 715.0 kWh x ¥0.55",
+          "amount": 393.25,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0002_202508",
+      "household_id": "H0002",
+      "bill_month": "2025-08",
+      "total_kwh": 381.0,
+      "electricity_cost": 209.55,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 209.55,
+      "paid_amount": 209.55,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2025-09-15",
+      "paid_date": "2025-08-28",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 381.0 kWh x ¥0.55",
+          "amount": 209.55,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0001_202509",
+      "household_id": "H0001",
+      "bill_month": "2025-09",
+      "total_kwh": 731.7,
+      "electricity_cost": 402.44,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 402.44,
+      "paid_amount": 402.44,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2025-10-15",
+      "paid_date": "2025-09-28",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 731.7 kWh x ¥0.55",
+          "amount": 402.44,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0002_202509",
+      "household_id": "H0002",
+      "bill_month": "2025-09",
+      "total_kwh": 381.01,
+      "electricity_cost": 209.56,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 209.56,
+      "paid_amount": 209.56,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2025-10-15",
+      "paid_date": "2025-09-28",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 381.01 kWh x ¥0.55",
+          "amount": 209.56,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0001_202510",
+      "household_id": "H0001",
+      "bill_month": "2025-10",
+      "total_kwh": 757.48,
+      "electricity_cost": 416.61,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 416.61,
+      "paid_amount": 416.61,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2025-11-15",
+      "paid_date": "2025-10-28",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 757.48 kWh x ¥0.55",
+          "amount": 416.61,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0002_202510",
+      "household_id": "H0002",
+      "bill_month": "2025-10",
+      "total_kwh": 438.2,
+      "electricity_cost": 241.01,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 241.01,
+      "paid_amount": 241.01,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2025-11-15",
+      "paid_date": "2025-10-28",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 438.2 kWh x ¥0.55",
+          "amount": 241.01,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0001_202511",
+      "household_id": "H0001",
+      "bill_month": "2025-11",
+      "total_kwh": 654.16,
+      "electricity_cost": 359.79,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 359.79,
+      "paid_amount": 359.79,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2025-12-15",
+      "paid_date": "2025-11-28",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 654.16 kWh x ¥0.55",
+          "amount": 359.79,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0002_202511",
+      "household_id": "H0002",
+      "bill_month": "2025-11",
+      "total_kwh": 390.59,
+      "electricity_cost": 214.82,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 214.82,
+      "paid_amount": 214.82,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2025-12-15",
+      "paid_date": "2025-11-28",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 390.59 kWh x ¥0.55",
+          "amount": 214.82,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0001_202512",
+      "household_id": "H0001",
+      "bill_month": "2025-12",
+      "total_kwh": 708.31,
+      "electricity_cost": 389.57,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 389.57,
+      "paid_amount": 389.57,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2025-13-15",
+      "paid_date": "2025-12-28",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 708.31 kWh x ¥0.55",
+          "amount": 389.57,
+          "ref_id": null
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL_H0002_202512",
+      "household_id": "H0002",
+      "bill_month": "2025-12",
+      "total_kwh": 441.52,
+      "electricity_cost": 242.84,
+      "unit_price": 0.55,
+      "repair_cost": 0,
+      "total_amount": 242.84,
+      "paid_amount": 242.84,
+      "status": 2,
+      "consecutive_unpaid_months": 0,
+      "warning_flag": 0,
+      "due_date": "2025-13-15",
+      "paid_date": "2025-12-28",
+      "items": [
+        {
+          "item_type": 1,
+          "item_desc": "电费 441.52 kWh x ¥0.55",
+          "amount": 242.84,
+          "ref_id": null
+        }
+      ]
+    }
+  ],
+  "next_bill_seq": 7,
+  "next_id": 17
+}

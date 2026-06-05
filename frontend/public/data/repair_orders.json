@@ -1,0 +1,7 @@
+{
+  "repair_orders": [
+    {"order_id": "REP_H0002_0001", "household_id": "H0002", "device_id": "DEV_H0002_B001", "fault_type": 5, "fault_description": "空调开机后不制冷，出风口有风但不冷", "contact_name": "陈美丽", "contact_phone": "13723456789", "appointment_date": "2025-12-20", "appointment_time": 2, "status": 4, "repair_result": "制冷剂泄漏，补充制冷剂后恢复正常", "repair_cost": 150.00, "technician_name": "王师傅", "completed_date": "2025-12-22", "rating": 5, "is_billed": 1, "created_at": "2025-12-18T14:30:00"},
+    {"order_id": "REP_H0001_0001", "household_id": "H0001", "device_id": "DEV_H0001_A004", "fault_type": 4, "fault_description": "洗衣机脱水时噪音很大，整个机器震动明显", "contact_name": "王建国", "contact_phone": "13912345678", "appointment_date": "2026-01-15", "appointment_time": 1, "status": 2, "repair_result": null, "repair_cost": null, "technician_name": "李师傅", "completed_date": null, "rating": null, "is_billed": 0, "created_at": "2026-01-12T09:15:00"}
+  ],
+  "next_repair_seq": 3
+}

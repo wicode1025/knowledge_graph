@@ -308,7 +308,7 @@ function renderMiniCharts(){
 .plt-row span:first-child{color:#aaa}
 .plt-row span:last-child{color:#555}
 
-.pl-chart{width:100%;height:100px;background:#fff;border:1px solid #edf0f4;border-radius:10px}
+.pl-chart{width:100%;height:160px;background:#fff;border:1px solid #edf0f4;border-radius:10px}
 
 /* ====== 右侧图谱 ====== */
 .profile-right{flex:1;display:flex;gap:0;overflow:hidden;min-width:0}

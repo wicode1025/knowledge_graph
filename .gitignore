@@ -72,8 +72,9 @@ kg_refit_data/
 *.log
 *.bak
 *.pptx
-data/
+/data/
 academic-paper-skills/
+!frontend/public/data/
 docs/screenshots/
 docs/paper_figures/
 frontend/*.png

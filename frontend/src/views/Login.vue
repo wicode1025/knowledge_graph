@@ -87,7 +87,7 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { login } from '../api/index.js'
 
 const router = useRouter()
 const loading = ref(false)
@@ -99,7 +99,7 @@ function fillDemo(role) {
   loginRole.value = role
   const accounts = { admin: 'admin', user: 'user001' }
   form.username = accounts[role]
-  form.password = role === 'admin' ? 'admin123' : 'pass123456'
+  form.password = '123456'
 }
 
 async function handleLogin() {
@@ -110,10 +110,7 @@ async function handleLogin() {
   }
   loading.value = true
   try {
-    const res = await axios.post('/api/kg/auth/login/', {
-      username: form.username,
-      password: form.password,
-    })
+    const res = await login(form.username, form.password)
     if (res.data.status === 'success') {
       const { token, user } = res.data
       // 验证角色是否匹配
@@ -124,7 +121,7 @@ async function handleLogin() {
       localStorage.setItem('user', JSON.stringify(user))
       localStorage.setItem('role', user.role)
       localStorage.setItem('elec_user_id', user.elec_user_id || '')
-      window.location.href = user.role === 'admin' ? '/admin' : '/'
+      window.location.href = user.role === 'admin' ? '/#/admin' : '/#/'
     }
   } catch (err) {
     error.value = err.response?.data?.message || '用户名或密码错误'

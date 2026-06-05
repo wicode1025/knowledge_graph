@@ -1,0 +1,905 @@
+{
+  "records": [
+    {
+      "record_id": 1,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A001",
+      "year_month": "2026-01",
+      "total_kwh": 232.5,
+      "avg_daily_kwh": 7.5,
+      "peak_power": 1567.0,
+      "hours_used": 155.0
+    },
+    {
+      "record_id": 2,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A002",
+      "year_month": "2026-01",
+      "total_kwh": 111.6,
+      "avg_daily_kwh": 3.6,
+      "peak_power": 1240.0,
+      "hours_used": 93.0
+    },
+    {
+      "record_id": 3,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A003",
+      "year_month": "2026-01",
+      "total_kwh": 131.04,
+      "avg_daily_kwh": 4.29,
+      "peak_power": 202.0,
+      "hours_used": 744.0
+    },
+    {
+      "record_id": 4,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A004",
+      "year_month": "2026-01",
+      "total_kwh": 16.14,
+      "avg_daily_kwh": 0.53,
+      "peak_power": 538.0,
+      "hours_used": 31.0
+    },
+    {
+      "record_id": 5,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A005",
+      "year_month": "2026-01",
+      "total_kwh": 143.1,
+      "avg_daily_kwh": 4.67,
+      "peak_power": 3180.0,
+      "hours_used": 46.5
+    },
+    {
+      "record_id": 6,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A006",
+      "year_month": "2026-01",
+      "total_kwh": 18.6,
+      "avg_daily_kwh": 0.61,
+      "peak_power": 155.0,
+      "hours_used": 124.0
+    },
+    {
+      "record_id": 7,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A007",
+      "year_month": "2026-01",
+      "total_kwh": 55.8,
+      "avg_daily_kwh": 1.83,
+      "peak_power": 310.0,
+      "hours_used": 186.0
+    },
+    {
+      "record_id": 8,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A008",
+      "year_month": "2026-01",
+      "total_kwh": 5.55,
+      "avg_daily_kwh": 0.18,
+      "peak_power": 37.0,
+      "hours_used": 155.0
+    },
+    {
+      "record_id": 9,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B001",
+      "year_month": "2026-01",
+      "total_kwh": 222.0,
+      "avg_daily_kwh": 7.25,
+      "peak_power": 1850.0,
+      "hours_used": 124.0
+    },
+    {
+      "record_id": 10,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B002",
+      "year_month": "2026-01",
+      "total_kwh": 153.36,
+      "avg_daily_kwh": 4.98,
+      "peak_power": 213.0,
+      "hours_used": 744.0
+    },
+    {
+      "record_id": 11,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B003",
+      "year_month": "2026-01",
+      "total_kwh": 2.25,
+      "avg_daily_kwh": 0.07,
+      "peak_power": 50.0,
+      "hours_used": 46.5
+    },
+    {
+      "record_id": 12,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B004",
+      "year_month": "2026-01",
+      "total_kwh": 19.8,
+      "avg_daily_kwh": 0.65,
+      "peak_power": 66.0,
+      "hours_used": 310.0
+    },
+    {
+      "record_id": 13,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B005",
+      "year_month": "2026-01",
+      "total_kwh": 10.8,
+      "avg_daily_kwh": 0.35,
+      "peak_power": 15.0,
+      "hours_used": 744.0
+    },
+    {
+      "record_id": 14,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B006",
+      "year_month": "2026-01",
+      "total_kwh": 1.44,
+      "avg_daily_kwh": 0.05,
+      "peak_power": 12.0,
+      "hours_used": 124.0
+    },
+    {
+      "record_id": 15,
+      "household_id": "H0003",
+      "device_id": "DEV_H0003_C001",
+      "year_month": "2026-01",
+      "total_kwh": 14.88,
+      "avg_daily_kwh": 0.49,
+      "peak_power": 62.0,
+      "hours_used": 248.0
+    },
+    {
+      "record_id": 16,
+      "household_id": "H0003",
+      "device_id": "DEV_H0003_C002",
+      "year_month": "2026-01",
+      "total_kwh": 210.96,
+      "avg_daily_kwh": 6.84,
+      "peak_power": 295.0,
+      "hours_used": 744.0
+    },
+    {
+      "record_id": 17,
+      "household_id": "H0003",
+      "device_id": "DEV_H0003_C003",
+      "year_month": "2026-01",
+      "total_kwh": 19.44,
+      "avg_daily_kwh": 0.64,
+      "peak_power": 432.0,
+      "hours_used": 46.5
+    },
+    {
+      "record_id": 18,
+      "household_id": "H0003",
+      "device_id": "DEV_H0003_C004",
+      "year_month": "2026-01",
+      "total_kwh": 19.65,
+      "avg_daily_kwh": 0.64,
+      "peak_power": 131.0,
+      "hours_used": 155.0
+    },
+    {
+      "record_id": 19,
+      "household_id": "H0003",
+      "device_id": "DEV_H0003_C005",
+      "year_month": "2026-01",
+      "total_kwh": 24.69,
+      "avg_daily_kwh": 0.81,
+      "peak_power": 823.0,
+      "hours_used": 31.0
+    },
+    {
+      "record_id": 20,
+      "household_id": "H0003",
+      "device_id": "DEV_H0003_C006",
+      "year_month": "2026-01",
+      "total_kwh": 6.84,
+      "avg_daily_kwh": 0.22,
+      "peak_power": 38.0,
+      "hours_used": 186.0
+    },
+    {
+      "record_id": 21,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A001",
+      "year_month": "2025-08",
+      "total_kwh": 242.23,
+      "avg_daily_kwh": 7.81,
+      "peak_power": 1567.0,
+      "hours_used": 161.5
+    },
+    {
+      "record_id": 22,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A002",
+      "year_month": "2025-08",
+      "total_kwh": 95.7,
+      "avg_daily_kwh": 3.09,
+      "peak_power": 1240.0,
+      "hours_used": 79.7
+    },
+    {
+      "record_id": 23,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A003",
+      "year_month": "2025-08",
+      "total_kwh": 122.2,
+      "avg_daily_kwh": 3.94,
+      "peak_power": 202.0,
+      "hours_used": 693.8
+    },
+    {
+      "record_id": 24,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A004",
+      "year_month": "2025-08",
+      "total_kwh": 14.8,
+      "avg_daily_kwh": 0.48,
+      "peak_power": 538.0,
+      "hours_used": 28.4
+    },
+    {
+      "record_id": 25,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A005",
+      "year_month": "2025-08",
+      "total_kwh": 153.25,
+      "avg_daily_kwh": 4.94,
+      "peak_power": 3180.0,
+      "hours_used": 49.8
+    },
+    {
+      "record_id": 26,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A006",
+      "year_month": "2025-08",
+      "total_kwh": 19.59,
+      "avg_daily_kwh": 0.63,
+      "peak_power": 155.0,
+      "hours_used": 130.6
+    },
+    {
+      "record_id": 27,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A007",
+      "year_month": "2025-08",
+      "total_kwh": 62.37,
+      "avg_daily_kwh": 2.01,
+      "peak_power": 310.0,
+      "hours_used": 207.9
+    },
+    {
+      "record_id": 28,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A008",
+      "year_month": "2025-08",
+      "total_kwh": 4.86,
+      "avg_daily_kwh": 0.16,
+      "peak_power": 37.0,
+      "hours_used": 135.8
+    },
+    {
+      "record_id": 29,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B001",
+      "year_month": "2025-08",
+      "total_kwh": 216.8,
+      "avg_daily_kwh": 6.99,
+      "peak_power": 1850.0,
+      "hours_used": 121.1
+    },
+    {
+      "record_id": 30,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B002",
+      "year_month": "2025-08",
+      "total_kwh": 131.73,
+      "avg_daily_kwh": 4.25,
+      "peak_power": 213.0,
+      "hours_used": 639.1
+    },
+    {
+      "record_id": 31,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B003",
+      "year_month": "2025-08",
+      "total_kwh": 2.06,
+      "avg_daily_kwh": 0.07,
+      "peak_power": 50.0,
+      "hours_used": 42.6
+    },
+    {
+      "record_id": 32,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B004",
+      "year_month": "2025-08",
+      "total_kwh": 19.83,
+      "avg_daily_kwh": 0.64,
+      "peak_power": 66.0,
+      "hours_used": 310.5
+    },
+    {
+      "record_id": 33,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B005",
+      "year_month": "2025-08",
+      "total_kwh": 9.27,
+      "avg_daily_kwh": 0.3,
+      "peak_power": 15.0,
+      "hours_used": 638.3
+    },
+    {
+      "record_id": 34,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B006",
+      "year_month": "2025-08",
+      "total_kwh": 1.31,
+      "avg_daily_kwh": 0.04,
+      "peak_power": 12.0,
+      "hours_used": 112.8
+    },
+    {
+      "record_id": 35,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A001",
+      "year_month": "2025-09",
+      "total_kwh": 242.95,
+      "avg_daily_kwh": 8.1,
+      "peak_power": 1567.0,
+      "hours_used": 162.0
+    },
+    {
+      "record_id": 36,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A002",
+      "year_month": "2025-09",
+      "total_kwh": 113.1,
+      "avg_daily_kwh": 3.77,
+      "peak_power": 1240.0,
+      "hours_used": 94.3
+    },
+    {
+      "record_id": 37,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A003",
+      "year_month": "2025-09",
+      "total_kwh": 120.05,
+      "avg_daily_kwh": 4.0,
+      "peak_power": 202.0,
+      "hours_used": 681.6
+    },
+    {
+      "record_id": 38,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A004",
+      "year_month": "2025-09",
+      "total_kwh": 16.57,
+      "avg_daily_kwh": 0.55,
+      "peak_power": 538.0,
+      "hours_used": 31.8
+    },
+    {
+      "record_id": 39,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A005",
+      "year_month": "2025-09",
+      "total_kwh": 156.38,
+      "avg_daily_kwh": 5.21,
+      "peak_power": 3180.0,
+      "hours_used": 50.8
+    },
+    {
+      "record_id": 40,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A006",
+      "year_month": "2025-09",
+      "total_kwh": 15.85,
+      "avg_daily_kwh": 0.53,
+      "peak_power": 155.0,
+      "hours_used": 105.6
+    },
+    {
+      "record_id": 41,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A007",
+      "year_month": "2025-09",
+      "total_kwh": 60.92,
+      "avg_daily_kwh": 2.03,
+      "peak_power": 310.0,
+      "hours_used": 203.1
+    },
+    {
+      "record_id": 42,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A008",
+      "year_month": "2025-09",
+      "total_kwh": 5.88,
+      "avg_daily_kwh": 0.2,
+      "peak_power": 37.0,
+      "hours_used": 164.2
+    },
+    {
+      "record_id": 43,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B001",
+      "year_month": "2025-09",
+      "total_kwh": 211.36,
+      "avg_daily_kwh": 7.05,
+      "peak_power": 1850.0,
+      "hours_used": 118.1
+    },
+    {
+      "record_id": 44,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B002",
+      "year_month": "2025-09",
+      "total_kwh": 137.51,
+      "avg_daily_kwh": 4.58,
+      "peak_power": 213.0,
+      "hours_used": 667.1
+    },
+    {
+      "record_id": 45,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B003",
+      "year_month": "2025-09",
+      "total_kwh": 2.56,
+      "avg_daily_kwh": 0.09,
+      "peak_power": 50.0,
+      "hours_used": 52.9
+    },
+    {
+      "record_id": 46,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B004",
+      "year_month": "2025-09",
+      "total_kwh": 18.83,
+      "avg_daily_kwh": 0.63,
+      "peak_power": 66.0,
+      "hours_used": 294.8
+    },
+    {
+      "record_id": 47,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B005",
+      "year_month": "2025-09",
+      "total_kwh": 9.48,
+      "avg_daily_kwh": 0.32,
+      "peak_power": 15.0,
+      "hours_used": 653.1
+    },
+    {
+      "record_id": 48,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B006",
+      "year_month": "2025-09",
+      "total_kwh": 1.27,
+      "avg_daily_kwh": 0.04,
+      "peak_power": 12.0,
+      "hours_used": 109.0
+    },
+    {
+      "record_id": 49,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A001",
+      "year_month": "2025-10",
+      "total_kwh": 256.74,
+      "avg_daily_kwh": 8.28,
+      "peak_power": 1567.0,
+      "hours_used": 171.2
+    },
+    {
+      "record_id": 50,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A002",
+      "year_month": "2025-10",
+      "total_kwh": 115.07,
+      "avg_daily_kwh": 3.71,
+      "peak_power": 1240.0,
+      "hours_used": 95.9
+    },
+    {
+      "record_id": 51,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A003",
+      "year_month": "2025-10",
+      "total_kwh": 143.11,
+      "avg_daily_kwh": 4.62,
+      "peak_power": 202.0,
+      "hours_used": 812.6
+    },
+    {
+      "record_id": 52,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A004",
+      "year_month": "2025-10",
+      "total_kwh": 17.25,
+      "avg_daily_kwh": 0.56,
+      "peak_power": 538.0,
+      "hours_used": 33.1
+    },
+    {
+      "record_id": 53,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A005",
+      "year_month": "2025-10",
+      "total_kwh": 144.66,
+      "avg_daily_kwh": 4.67,
+      "peak_power": 3180.0,
+      "hours_used": 47.0
+    },
+    {
+      "record_id": 54,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A006",
+      "year_month": "2025-10",
+      "total_kwh": 21.24,
+      "avg_daily_kwh": 0.69,
+      "peak_power": 155.0,
+      "hours_used": 141.6
+    },
+    {
+      "record_id": 55,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A007",
+      "year_month": "2025-10",
+      "total_kwh": 53.77,
+      "avg_daily_kwh": 1.73,
+      "peak_power": 310.0,
+      "hours_used": 179.2
+    },
+    {
+      "record_id": 56,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A008",
+      "year_month": "2025-10",
+      "total_kwh": 5.64,
+      "avg_daily_kwh": 0.18,
+      "peak_power": 37.0,
+      "hours_used": 157.4
+    },
+    {
+      "record_id": 57,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B001",
+      "year_month": "2025-10",
+      "total_kwh": 243.94,
+      "avg_daily_kwh": 7.87,
+      "peak_power": 1850.0,
+      "hours_used": 136.3
+    },
+    {
+      "record_id": 58,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B002",
+      "year_month": "2025-10",
+      "total_kwh": 158.81,
+      "avg_daily_kwh": 5.12,
+      "peak_power": 213.0,
+      "hours_used": 770.5
+    },
+    {
+      "record_id": 59,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B003",
+      "year_month": "2025-10",
+      "total_kwh": 2.49,
+      "avg_daily_kwh": 0.08,
+      "peak_power": 50.0,
+      "hours_used": 51.5
+    },
+    {
+      "record_id": 60,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B004",
+      "year_month": "2025-10",
+      "total_kwh": 20.26,
+      "avg_daily_kwh": 0.65,
+      "peak_power": 66.0,
+      "hours_used": 317.2
+    },
+    {
+      "record_id": 61,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B005",
+      "year_month": "2025-10",
+      "total_kwh": 11.46,
+      "avg_daily_kwh": 0.37,
+      "peak_power": 15.0,
+      "hours_used": 789.7
+    },
+    {
+      "record_id": 62,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B006",
+      "year_month": "2025-10",
+      "total_kwh": 1.24,
+      "avg_daily_kwh": 0.04,
+      "peak_power": 12.0,
+      "hours_used": 107.1
+    },
+    {
+      "record_id": 63,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A001",
+      "year_month": "2025-11",
+      "total_kwh": 213.52,
+      "avg_daily_kwh": 7.12,
+      "peak_power": 1567.0,
+      "hours_used": 142.3
+    },
+    {
+      "record_id": 64,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A002",
+      "year_month": "2025-11",
+      "total_kwh": 104.55,
+      "avg_daily_kwh": 3.48,
+      "peak_power": 1240.0,
+      "hours_used": 87.1
+    },
+    {
+      "record_id": 65,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A003",
+      "year_month": "2025-11",
+      "total_kwh": 114.52,
+      "avg_daily_kwh": 3.82,
+      "peak_power": 202.0,
+      "hours_used": 650.2
+    },
+    {
+      "record_id": 66,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A004",
+      "year_month": "2025-11",
+      "total_kwh": 14.85,
+      "avg_daily_kwh": 0.49,
+      "peak_power": 538.0,
+      "hours_used": 28.5
+    },
+    {
+      "record_id": 67,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A005",
+      "year_month": "2025-11",
+      "total_kwh": 125.97,
+      "avg_daily_kwh": 4.2,
+      "peak_power": 3180.0,
+      "hours_used": 40.9
+    },
+    {
+      "record_id": 68,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A006",
+      "year_month": "2025-11",
+      "total_kwh": 17.36,
+      "avg_daily_kwh": 0.58,
+      "peak_power": 155.0,
+      "hours_used": 115.7
+    },
+    {
+      "record_id": 69,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A007",
+      "year_month": "2025-11",
+      "total_kwh": 58.07,
+      "avg_daily_kwh": 1.94,
+      "peak_power": 310.0,
+      "hours_used": 193.6
+    },
+    {
+      "record_id": 70,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A008",
+      "year_month": "2025-11",
+      "total_kwh": 5.32,
+      "avg_daily_kwh": 0.18,
+      "peak_power": 37.0,
+      "hours_used": 148.7
+    },
+    {
+      "record_id": 71,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B001",
+      "year_month": "2025-11",
+      "total_kwh": 213.35,
+      "avg_daily_kwh": 7.11,
+      "peak_power": 1850.0,
+      "hours_used": 119.2
+    },
+    {
+      "record_id": 72,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B002",
+      "year_month": "2025-11",
+      "total_kwh": 139.99,
+      "avg_daily_kwh": 4.67,
+      "peak_power": 213.0,
+      "hours_used": 679.2
+    },
+    {
+      "record_id": 73,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B003",
+      "year_month": "2025-11",
+      "total_kwh": 2.09,
+      "avg_daily_kwh": 0.07,
+      "peak_power": 50.0,
+      "hours_used": 43.2
+    },
+    {
+      "record_id": 74,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B004",
+      "year_month": "2025-11",
+      "total_kwh": 22.39,
+      "avg_daily_kwh": 0.75,
+      "peak_power": 66.0,
+      "hours_used": 350.6
+    },
+    {
+      "record_id": 75,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B005",
+      "year_month": "2025-11",
+      "total_kwh": 11.28,
+      "avg_daily_kwh": 0.38,
+      "peak_power": 15.0,
+      "hours_used": 777.0
+    },
+    {
+      "record_id": 76,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B006",
+      "year_month": "2025-11",
+      "total_kwh": 1.49,
+      "avg_daily_kwh": 0.05,
+      "peak_power": 12.0,
+      "hours_used": 128.1
+    },
+    {
+      "record_id": 77,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A001",
+      "year_month": "2025-12",
+      "total_kwh": 209.56,
+      "avg_daily_kwh": 6.76,
+      "peak_power": 1567.0,
+      "hours_used": 139.7
+    },
+    {
+      "record_id": 78,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A002",
+      "year_month": "2025-12",
+      "total_kwh": 119.27,
+      "avg_daily_kwh": 3.85,
+      "peak_power": 1240.0,
+      "hours_used": 99.4
+    },
+    {
+      "record_id": 79,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A003",
+      "year_month": "2025-12",
+      "total_kwh": 117.81,
+      "avg_daily_kwh": 3.8,
+      "peak_power": 202.0,
+      "hours_used": 668.9
+    },
+    {
+      "record_id": 80,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A004",
+      "year_month": "2025-12",
+      "total_kwh": 15.56,
+      "avg_daily_kwh": 0.5,
+      "peak_power": 538.0,
+      "hours_used": 29.9
+    },
+    {
+      "record_id": 81,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A005",
+      "year_month": "2025-12",
+      "total_kwh": 164.12,
+      "avg_daily_kwh": 5.29,
+      "peak_power": 3180.0,
+      "hours_used": 53.3
+    },
+    {
+      "record_id": 82,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A006",
+      "year_month": "2025-12",
+      "total_kwh": 19.38,
+      "avg_daily_kwh": 0.63,
+      "peak_power": 155.0,
+      "hours_used": 129.2
+    },
+    {
+      "record_id": 83,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A007",
+      "year_month": "2025-12",
+      "total_kwh": 56.75,
+      "avg_daily_kwh": 1.83,
+      "peak_power": 310.0,
+      "hours_used": 189.2
+    },
+    {
+      "record_id": 84,
+      "household_id": "H0001",
+      "device_id": "DEV_H0001_A008",
+      "year_month": "2025-12",
+      "total_kwh": 5.86,
+      "avg_daily_kwh": 0.19,
+      "peak_power": 37.0,
+      "hours_used": 163.6
+    },
+    {
+      "record_id": 85,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B001",
+      "year_month": "2025-12",
+      "total_kwh": 244.83,
+      "avg_daily_kwh": 7.9,
+      "peak_power": 1850.0,
+      "hours_used": 136.8
+    },
+    {
+      "record_id": 86,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B002",
+      "year_month": "2025-12",
+      "total_kwh": 166.06,
+      "avg_daily_kwh": 5.36,
+      "peak_power": 213.0,
+      "hours_used": 805.6
+    },
+    {
+      "record_id": 87,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B003",
+      "year_month": "2025-12",
+      "total_kwh": 2.07,
+      "avg_daily_kwh": 0.07,
+      "peak_power": 50.0,
+      "hours_used": 42.7
+    },
+    {
+      "record_id": 88,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B004",
+      "year_month": "2025-12",
+      "total_kwh": 17.02,
+      "avg_daily_kwh": 0.55,
+      "peak_power": 66.0,
+      "hours_used": 266.5
+    },
+    {
+      "record_id": 89,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B005",
+      "year_month": "2025-12",
+      "total_kwh": 10.2,
+      "avg_daily_kwh": 0.33,
+      "peak_power": 15.0,
+      "hours_used": 702.8
+    },
+    {
+      "record_id": 90,
+      "household_id": "H0002",
+      "device_id": "DEV_H0002_B006",
+      "year_month": "2025-12",
+      "total_kwh": 1.34,
+      "avg_daily_kwh": 0.04,
+      "peak_power": 12.0,
+      "hours_used": 115.4
+    }
+  ],
+  "next_record_id": 91
+}
