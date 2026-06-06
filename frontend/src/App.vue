@@ -47,16 +47,24 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const hideNav = computed(() => route.meta.hideNav)
-const userRole = computed(() => localStorage.getItem('role') || 'user')
-const savedUser = computed(() => {
-  try { return JSON.parse(localStorage.getItem('user') || '{}').username } catch { return '' }
-})
+
+function getRole() { return localStorage.getItem('role') || 'user' }
+function getUserName() { try { return JSON.parse(localStorage.getItem('user')||'{}').username } catch { return '' } }
+
+const userRole = ref(getRole())
+const savedUser = ref(getUserName())
 const roleText = computed(() => userRole.value === 'admin' ? '管理员' : '家庭用户')
+
+// 初始化时重新读取（确保硬刷新后值正确）
+window.addEventListener('load', () => {
+  userRole.value = getRole()
+  savedUser.value = getUserName()
+})
 
 function handleLogout() {
   localStorage.removeItem('token')
