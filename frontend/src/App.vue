@@ -47,7 +47,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -60,8 +60,8 @@ const userRole = ref(getRole())
 const savedUser = ref(getUserName())
 const roleText = computed(() => userRole.value === 'admin' ? '管理员' : '家庭用户')
 
-// 初始化时重新读取（确保硬刷新后值正确）
-window.addEventListener('load', () => {
+// 每次路由变化时从 localStorage 重新读取角色，确保导航栏正确
+watch(() => route.fullPath, () => {
   userRole.value = getRole()
   savedUser.value = getUserName()
 })
