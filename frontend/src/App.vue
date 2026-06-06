@@ -59,8 +59,11 @@ const savedUser = computed(() => {
 const roleText = computed(() => userRole.value === 'admin' ? '管理员' : '家庭用户')
 
 function handleLogout() {
-  localStorage.clear()
-  window.location.href = '/login'
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
+  localStorage.removeItem('role')
+  localStorage.removeItem('elec_user_id')
+  window.location.href = '/#/login'
 }
 </script>
 
