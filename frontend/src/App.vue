@@ -47,21 +47,30 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
+const router = useRouter()
 const hideNav = computed(() => route.meta.hideNav)
 
 function getRole() { return localStorage.getItem('role') || 'user' }
 function getUserName() { try { return JSON.parse(localStorage.getItem('user')||'{}').username } catch { return '' } }
 
-const userRole = ref(getRole())
-const savedUser = ref(getUserName())
+const userRole = ref('user')
+const savedUser = ref('')
 const roleText = computed(() => userRole.value === 'admin' ? '管理员' : '家庭用户')
 
-// 每次路由变化时从 localStorage 重新读取角色，确保导航栏正确
-watch(() => route.fullPath, () => {
+// 路由守卫在每次导航前读取 localStorage 角色
+router.beforeEach((to) => {
+  userRole.value = getRole()
+  savedUser.value = getUserName()
+  // admin 路由只有管理员能访问
+  if (to.meta.role === 'admin' && userRole.value !== 'admin') return '/'
+  return true
+})
+
+onMounted(() => {
   userRole.value = getRole()
   savedUser.value = getUserName()
 })
