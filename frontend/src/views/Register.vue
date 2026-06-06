@@ -72,7 +72,7 @@
           <div v-if="step===3" class="rf-step">
             <p class="rf-desc">选择您家中常用的电器设备，可稍后在设备管理中添加更多</p>
             <div class="rf-device-grid">
-              <div v-for="dt in deviceTypes" :key="dt.type_code" :class="['rfd-item',{selected:selectedDevices.includes(dt.type_code)}]" @click="toggleDevice(dt.type_code)">
+              <div v-for="dt in deviceTypes" :key="dt.device_type_code" :class="['rfd-item',{selected:selectedDevices.includes(dt.device_type_code)}]" @click="toggleDevice(dt.device_type_code)">
                 <span class="rfd-name">{{ dt.device_name }}</span>
                 <span class="rfd-power">{{ dt.default_power }}W</span>
               </div>
@@ -112,8 +112,7 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
-import { getOptions, getDeviceTypes, addDevice } from '../api'
+import { register, getOptions, getDeviceTypes, updateMyHousehold, updateHousingInfo, updateIncomeInfo, addDevice } from '../api'
 
 const router = useRouter()
 const step = ref(0)
@@ -135,9 +134,10 @@ const form = reactive({
 onMounted(async ()=>{
   const [o,d]=await Promise.all([getOptions(),getDeviceTypes()])
   Object.assign(opts,o.data.options||{})
+  const grouped = d.data.device_types || {}
   const allTypes=[]
-  Object.values(d.data.categories||{}).forEach(v=>allTypes.push(...v))
-  deviceTypes.value=allTypes.sort((a,b)=>b.default_power-a.default_power).slice(0,24)
+  Object.values(grouped).forEach(v => allTypes.push(...v))
+  deviceTypes.value = allTypes
 })
 
 function toggleDevice(code){const i=selectedDevices.value.indexOf(code);i>-1?selectedDevices.value.splice(i,1):selectedDevices.value.push(code)}
@@ -154,42 +154,47 @@ function nextStep(){
 async function submitRegister(){
   registering.value=true;error.value=''
   try {
-    const regRes = await axios.post('/api/kg/auth/register/',{username:form.username,password:form.password,email:''})
-    const token=regRes.data.token; const hid=regRes.data.user.elec_user_id
+    const regRes = await register(form.username, form.password, '')
+    const user = regRes.data.user
+    const hid = user.elec_user_id
+    // 先存 token 和 elec_user_id，后续更新接口依赖这些值
+    localStorage.setItem('token', regRes.data.token)
+    localStorage.setItem('elec_user_id', hid || '')
     // 更新基本信息
-    await axios.put('/api/kg/household/mine/update/',{
+    await updateMyHousehold({
       real_name:form.real_name,gender:form.gender,birth_year:form.birth_year,
       education_level:form.education_level,marital_status:form.marital_status,
       occupation:form.occupation,phone:form.phone,is_urban:form.is_urban,
       daily_schedule:form.daily_schedule,address_detail:form.address_detail||'',
-    },{headers:{Authorization:`Bearer ${token}`}})
+    })
     // 住房
-    await axios.put('/api/kg/household/housing/update/',{
+    await updateHousingInfo({
       housing_type:form.housing_type,housing_area:form.housing_area,
       bedroom_count:form.bedroom_count,living_room_count:form.living_room_count,
-    },{headers:{Authorization:`Bearer ${token}`}})
+    })
     // 收入
-    await axios.put('/api/kg/household/income/update/',{
+    await updateIncomeInfo({
       year:2026,personal_income:form.personal_income,
       household_income:form.household_income,income_source:form.income_source,
       self_evaluated_wealth:form.self_rating,
-    },{headers:{Authorization:`Bearer ${token}`}})
+    })
     // 添加设备
     for(const tc of selectedDevices.value){
-      const dt=deviceTypes.value.find(d=>d.type_code===tc)
+      const dt=deviceTypes.value.find(d=>d.device_type_code===tc)
       if(dt){
-        await axios.post('/api/kg/devices/',{
-          device_type_code:tc,rated_power:dt.default_power,
-          daily_usage_hours:dt.typical_daily_hours||1,brand_choice:'普通品牌',usage_years:0,
-        },{headers:{Authorization:`Bearer ${token}`}})
+        await addDevice({
+          type_code:tc, rated_power:dt.default_power,
+          daily_usage_hours:dt.typical_daily_hours||1, brand_choice:'通用品牌', usage_years:0,
+          usage_habit:'2', bqf:1.0,
+        })
       }
     }
-    localStorage.setItem('token',token)
-    localStorage.setItem('user',JSON.stringify(regRes.data.user))
-    localStorage.setItem('role','user')
-    localStorage.setItem('elec_user_id',hid||'')
-    setTimeout(()=>router.push('/'),1500)
-  } catch(e){error.value=e.response?.data?.message||'注册失败，请重试'}
+    localStorage.setItem('token', regRes.data.token)
+    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('role', 'user')
+    localStorage.setItem('elec_user_id', hid||'')
+    setTimeout(() => router.push('/'), 1500)
+  } catch(e){error.value=e.response?.data?.message||e.response?.data?.error||'注册失败，请重试'}
   finally{registering.value=false}
 }
 </script>

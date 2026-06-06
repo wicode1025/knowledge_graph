@@ -265,7 +265,7 @@ export function mockGetUserKG(overrideUid) {
   const totalCost = Math.round(allBills.reduce((s, b) => s + parseFloat(b.total_amount || 0), 0) * 100) / 100
   const repairCost = Math.round(allBills.reduce((s, b) => s + parseFloat(b.repair_cost || 0), 0) * 100) / 100
   nodes.push({
-    id: cbId, name: `账单记录 (${totalBills}条)`, category: 'category',
+    id: cbId, name: '账单记录', category: 'category',
     symbolSize: 56, group: 'category',
     itemStyle: { color: '#ebf0f5', borderColor: '#c8d6e5', borderWidth: 2, borderRadius: 8 },
     detail: {

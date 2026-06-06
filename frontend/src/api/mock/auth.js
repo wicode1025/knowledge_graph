@@ -83,8 +83,16 @@ export function mockRegister(data) {
   return {
     status: 201,
     data: {
+      status: 'success',
       token,
-      user: { id: newId, username: data.username, email: data.email || '', is_staff: false },
+      user: {
+        id: newId,
+        username: data.username,
+        email: data.email || '',
+        role: 'user',
+        is_staff: false,
+        elec_user_id: householdId
+      },
       role: 'user',
       elec_user_id: householdId,
       message: '注册成功'
