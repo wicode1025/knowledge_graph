@@ -24,14 +24,16 @@ export function mockGetAdminStats() {
   return {
     status: 200,
     data: {
-      total_users: users.length,
-      total_devices: devices.length,
-      damaged_devices: devices.filter(d => !d.is_active).length,
-      total_bills: bills.length,
-      paid_bills: bills.filter(b => b.status === 2).length,
-      pending_repairs: repairs.filter(r => r.status === 1).length,
-      current_month: sysSeed?.system?.year_month || '2026-01',
-      unit_price: parseFloat(sysSeed?.system?.unit_price || 0.55)
+      stats: {
+        total_users: users.length,
+        total_devices: devices.length,
+        active_devices: devices.filter(d => d.is_active).length,
+        damaged_devices: devices.filter(d => !d.is_active).length,
+        bills_collected: `${bills.filter(b => b.status === 2).length}/${bills.length}`,
+        total_months_elapsed: sysSeed?.system?.total_months_elapsed || 0,
+        pending_repairs: repairs.filter(r => r.status === 1).length,
+        unit_price: parseFloat(sysSeed?.system?.unit_price || 0.55)
+      }
     }
   }
 }
