@@ -120,50 +120,74 @@
             <template v-else>
               <div class="kurp-head"><span>节点详情</span><button class="kurp-close" @click="adminKgPanelOpen=false">×</button></div>
               <div class="kurp-body" v-if="adminKgPanelData">
-                <h4 class="kurp-dname">{{ adminKgPanelData.name }}</h4>
+                <!-- ====== 用户中心 ====== -->
                 <template v-if="adminKgPanelData.type==='user'">
-                  <div class="kurp-rows" v-if="adminKgPanelData.info">
-                    <div v-for="(v,k) in adminKgPanelData.info" :key="k" class="kurpr"><span>{{ k }}</span><span>{{ v }}</span></div>
+                  <h4 class="kurp-dname">{{ adminKgPanelData.name }}</h4>
+                  <span class="kurp-badge-s" :style="{background: adminKgPanelData.energy?.color||'#999'}">{{ adminKgPanelData.energy?.level||'--' }}</span>
+                  <div class="kurp-sec"><div class="kurp-sec-t">基本信息</div>
+                    <div class="kurp-rows"><div class="kurpr" v-for="(v,k) in adminKgPanelData.info" :key="k"><span>{{ k }}</span><span>{{ v||'--' }}</span></div></div>
                   </div>
-                  <div class="kurp-rows" v-if="adminKgPanelData.stats">
-                    <div class="kurpr"><span>设备</span><span>{{ adminKgPanelData.stats.active }}/{{ adminKgPanelData.stats.devices }}</span></div>
-                    <div class="kurpr"><span>账单</span><span>{{ adminKgPanelData.stats.paid }}/{{ adminKgPanelData.stats.bills }}</span></div>
+                  <div class="kurp-sec" v-if="adminKgPanelData.housing"><div class="kurp-sec-t">住房信息</div>
+                    <div class="kurp-rows"><div class="kurpr"><span>类型</span><span>{{ adminKgPanelData.housing.type||'--' }}</span></div><div class="kurpr"><span>面积</span><span>{{ adminKgPanelData.housing.area ? adminKgPanelData.housing.area+' m²' : '--' }}</span></div><div class="kurpr"><span>户型</span><span>{{ adminKgPanelData.housing.bedroom||0 }}室{{ adminKgPanelData.housing.living||0 }}厅</span></div></div>
                   </div>
-                </template>
-                <template v-else-if="adminKgPanelData.type==='category'">
-                  <div v-if="adminKgPanelData.subtype==='devices'" class="kurp-rows">
-                    <div class="kurpr"><span>设备总数</span><span>{{ adminKgPanelData.total }}</span></div>
-                    <div class="kurpr"><span>运行中</span><span>{{ adminKgPanelData.active }}</span></div>
-                    <div class="kurpr"><span>损坏</span><span>{{ adminKgPanelData.damaged }}</span></div>
-                  </div>
-                  <div v-else-if="adminKgPanelData.subtype==='bills'" class="kurp-rows">
-                    <div class="kurpr"><span>总账单</span><span>{{ adminKgPanelData.total }}</span></div>
-                    <div class="kurpr"><span>已缴</span><span>{{ adminKgPanelData.paid }}</span></div>
-                    <div class="kurpr"><span>缴费率</span><span>{{ adminKgPanelData.pay_rate }}%</span></div>
-                    <div class="kurpr"><span>总费用</span><span>¥{{ adminKgPanelData.total_cost }}</span></div>
-                  </div>
-                  <div v-else-if="adminKgPanelData.subtype==='energy'" class="kurp-rows">
-                    <div class="kurpr"><span>等级</span><span>{{ adminKgPanelData.level }}</span></div>
-                    <div class="kurpr"><span>月均</span><span>{{ adminKgPanelData.avg_kwh }} kWh</span></div>
-                    <div class="kurpr"><span>波动</span><span>{{ adminKgPanelData.std_kwh }}</span></div>
+                  <div class="kurp-sec" v-if="adminKgPanelData.stats"><div class="kurp-sec-t">概况</div>
+                    <div class="kurp-rows"><div class="kurpr"><span>设备</span><span>{{ adminKgPanelData.stats.active||0 }}/{{ adminKgPanelData.stats.devices||0 }} 运行中</span></div><div class="kurpr"><span>账单</span><span>{{ adminKgPanelData.stats.paid||0 }}/{{ adminKgPanelData.stats.bills||0 }} 已缴</span></div></div>
                   </div>
                 </template>
+                <!-- ====== 设备管理大类 ====== -->
+                <template v-else-if="adminKgPanelData.subtype==='devices'">
+                  <h4 class="kurp-dname">设备管理</h4>
+                  <div class="kurp-metrics"><div class="kurpm"><div class="kurpm-val">{{ adminKgPanelData.total||0 }}</div><div class="kurpm-lbl">总数</div></div><div class="kurpm"><div class="kurpm-val on">{{ adminKgPanelData.active||0 }}</div><div class="kurpm-lbl">运行中</div></div><div class="kurpm"><div class="kurpm-val off">{{ adminKgPanelData.damaged||0 }}</div><div class="kurpm-lbl">损坏</div></div></div>
+                  <div v-if="adminKgPanelData.high_risk?.length" class="kurp-sec"><div class="kurp-sec-t">高风险设备</div>
+                    <div v-for="r in adminKgPanelData.high_risk" :key="r.name" class="kurpr"><span>{{ r.name }}</span><span :class="r.prob>0.5?'off':r.prob>0.3?'warn':''">{{ (r.prob*100).toFixed(1) }}%</span></div>
+                  </div>
+                </template>
+                <!-- ====== 用电特征大类 ====== -->
+                <template v-else-if="adminKgPanelData.subtype==='energy'">
+                  <h4 class="kurp-dname">用电特征</h4>
+                  <span class="kurp-badge-s" :style="{background: adminKgPanelData.level_color||'#999'}">{{ adminKgPanelData.level||'--' }}</span>
+                  <div class="kurp-rows"><div class="kurpr"><span>月均用电</span><span>{{ adminKgPanelData.avg_kwh||0 }} kWh</span></div><div class="kurpr"><span>累计用电</span><span>{{ (adminKgPanelData.total_kwh||0).toLocaleString() }} kWh</span></div><div class="kurpr"><span>统计月份</span><span>{{ adminKgPanelData.months||0 }} 个月</span></div><div class="kurpr"><span>标准差</span><span>{{ adminKgPanelData.std_kwh||0 }}</span></div><div class="kurpr"><span>最大月</span><span>{{ adminKgPanelData.max_month||0 }} kWh</span></div><div class="kurpr"><span>最小月</span><span>{{ adminKgPanelData.min_month||0 }} kWh</span></div></div>
+                </template>
+                <!-- ====== 账单记录大类 ====== -->
+                <template v-else-if="adminKgPanelData.subtype==='bills'">
+                  <h4 class="kurp-dname">账单记录</h4>
+                  <div class="kurp-metrics"><div class="kurpm"><div class="kurpm-val">{{ adminKgPanelData.total||0 }}</div><div class="kurpm-lbl">总数</div></div><div class="kurpm"><div class="kurpm-val on">{{ adminKgPanelData.paid||0 }}</div><div class="kurpm-lbl">已缴</div></div><div class="kurpm"><div class="kurpm-val off">{{ adminKgPanelData.unpaid||0 }}</div><div class="kurpm-lbl">未缴</div></div></div>
+                  <div class="kurp-rows"><div class="kurpr"><span>总费用</span><span>¥{{ adminKgPanelData.total_cost||0 }}</span></div><div class="kurpr"><span>缴费率</span><span>{{ adminKgPanelData.pay_rate||0 }}%</span></div><div class="kurpr"><span>信用</span><span :class="adminKgPanelData.credit==='良好'?'on':'off'">{{ adminKgPanelData.credit||'--' }}</span></div></div>
+                </template>
+                <!-- ====== 家庭信息大类 ====== -->
+                <template v-else-if="adminKgPanelData.subtype==='family'">
+                  <h4 class="kurp-dname">家庭信息</h4>
+                  <div class="kurp-metrics"><div class="kurpm"><div class="kurpm-val">{{ adminKgPanelData.members||0 }}</div><div class="kurpm-lbl">成员</div></div><div class="kurpm"><div class="kurpm-val on">{{ adminKgPanelData.cohabit_count||0 }}</div><div class="kurpm-lbl">同住</div></div></div>
+                  <div class="kurp-rows"><div class="kurpr"><span>住房类型</span><span>{{ adminKgPanelData.housing_type||'--' }}</span></div><div class="kurpr"><span>面积</span><span>{{ adminKgPanelData.area ? adminKgPanelData.area+' m²' : '--' }}</span></div><div class="kurpr"><span>户型</span><span>{{ adminKgPanelData.bedrooms||0 }}室{{ adminKgPanelData.living_rooms||0 }}厅 · {{ adminKgPanelData.kitchen||0 }}厨{{ adminKgPanelData.bathroom||0 }}卫</span></div><div class="kurpr"><span>楼层</span><span>{{ adminKgPanelData.floor||'--' }}/{{ adminKgPanelData.total_floors||'--' }}</span></div><div class="kurpr"><span>电梯</span><span>{{ adminKgPanelData.elevator||'--' }}</span></div><div class="kurpr"><span>供暖</span><span>{{ adminKgPanelData.heating||'--' }}</span></div><div class="kurpr"><span>朝向</span><span>{{ adminKgPanelData.orientation||'--' }}</span></div>
+                  </div>
+                </template>
+                <!-- ====== 画像标签大类 ====== -->
+                <template v-else-if="adminKgPanelData.subtype==='tags'">
+                  <h4 class="kurp-dname">画像标签</h4>
+                  <div class="kurp-rows"><div class="kurpr"><span>能耗等级</span><span :style="{color: adminKgPanelData.energy_color}">{{ adminKgPanelData.energy_level||'--' }}</span></div><div class="kurpr"><span>缴费信用</span><span :class="adminKgPanelData.credit==='良好'?'on':'off'">{{ adminKgPanelData.credit||'--' }}</span></div><div class="kurpr"><span>设备规模</span><span>{{ adminKgPanelData.device_count||0 }} 台</span></div><div class="kurpr"><span>家庭规模</span><span>{{ adminKgPanelData.family_size||0 }} 人</span></div></div>
+                </template>
+                <!-- ====== 设备节点 ====== -->
                 <template v-else-if="adminKgPanelData.type==='device'">
-                  <div class="kurp-rows">
-                    <div class="kurpr"><span>类别</span><span>{{ adminKgPanelData.category }}</span></div>
-                    <div class="kurpr"><span>功率</span><span>{{ adminKgPanelData.power }} W</span></div>
-                    <div class="kurpr"><span>年限</span><span>{{ adminKgPanelData.usage_years?.toFixed?.(1) || adminKgPanelData.usage_years }}年</span></div>
-                    <div class="kurpr"><span>品牌</span><span>{{ adminKgPanelData.brand || '-' }}</span></div>
-                    <div class="kurpr"><span>状态</span><span :class="adminKgPanelData.is_active?'c-on':'c-off'">{{ adminKgPanelData.is_active ? '正常' : '损坏' }}</span></div>
-                    <div class="kurpr"><span>损坏概率</span><span :class="adminKgPanelData.damage_prob>0.5?'c-red':''">{{ ((adminKgPanelData.damage_prob||0)*100).toFixed(1) }}%</span></div>
-                  </div>
+                  <h4 class="kurp-dname">{{ adminKgPanelData.name }}</h4>
+                  <span class="kurp-badge-s" :class="adminKgPanelData.is_active?'on':'off'">{{ adminKgPanelData.is_active?'正常运行':'已损坏' }}</span>
+                  <div class="kurp-rows"><div class="kurpr"><span>类别</span><span>{{ adminKgPanelData.category||'--' }}</span></div><div class="kurpr"><span>品牌</span><span>{{ adminKgPanelData.brand||'--' }}</span></div><div class="kurpr"><span>功率</span><span>{{ adminKgPanelData.power||0 }} W (额定{{ adminKgPanelData.rated_power||0 }}W)</span></div><div class="kurpr"><span>年限</span><span>{{ adminKgPanelData.usage_years?.toFixed?.(1)||adminKgPanelData.usage_years||0 }} 年</span></div><div class="kurpr"><span>寿命</span><span>{{ adminKgPanelData.lifespan||10 }} 年 · 剩余{{ adminKgPanelData.damage_pred?.remain||0 }}年</span></div><div class="kurpr"><span>使用习惯</span><span>{{ adminKgPanelData.habit||'--' }}</span></div><div class="kurpr"><span>损坏率</span><span :class="(adminKgPanelData.damage_prob||0)>0.8?'off':(adminKgPanelData.damage_prob||0)>0.5?'warn':''">{{ ((adminKgPanelData.damage_prob||0)*100).toFixed(1) }}%</span></div><div class="kurpr"><span>1年后</span><span :class="(adminKgPanelData.damage_pred?.next1||0)>0.8?'off':(adminKgPanelData.damage_pred?.next1||0)>0.5?'warn':''">{{ ((adminKgPanelData.damage_pred?.next1||0)*100).toFixed(1) }}%</span></div></div>
                 </template>
+                <!-- ====== 账单节点 ====== -->
                 <template v-else-if="adminKgPanelData.type==='bill'">
+                  <h4 class="kurp-dname">{{ adminKgPanelData.month }}</h4>
+                  <span class="kurp-badge-s" :class="adminKgPanelData.status==='已缴'?'on':'off'">{{ adminKgPanelData.status }}</span>
+                  <div class="kurp-rows"><div class="kurpr"><span>用电量</span><span>{{ adminKgPanelData.kwh||0 }} kWh</span></div><div class="kurpr"><span>电价</span><span>¥{{ adminKgPanelData.unit_price||'0.55' }}/度</span></div><div class="kurpr"><span>电费</span><span>¥{{ adminKgPanelData.elec_cost||0 }}</span></div><div class="kurpr"><span>维修费</span><span>¥{{ adminKgPanelData.repair_cost||0 }}</span></div><div class="kurpr total"><span>合计</span><span>¥{{ adminKgPanelData.total||0 }}</span></div></div>
+                </template>
+                <!-- ====== 标签/能耗 ====== -->
+                <template v-else-if="adminKgPanelData.type==='tag'">
+                  <h4 class="kurp-dname">{{ adminKgPanelData.name }}</h4>
+                  <div class="kurp-rows"><div class="kurpr"><span>标签值</span><span>{{ adminKgPanelData.value||'--' }}</span></div></div>
+                </template>
+                <!-- ====== 月度用电/成员 ====== -->
+                <template v-else>
+                  <h4 class="kurp-dname">{{ adminKgPanelData.name }}</h4>
                   <div class="kurp-rows">
-                    <div class="kurpr"><span>月份</span><span>{{ adminKgPanelData.month }}</span></div>
-                    <div class="kurpr"><span>用电</span><span>{{ adminKgPanelData.kwh }} kWh</span></div>
-                    <div class="kurpr"><span>电费</span><span>¥{{ adminKgPanelData.elec_cost }}</span></div>
-                    <div class="kurpr"><span>状态</span><span>{{ adminKgPanelData.status }}</span></div>
+                    <div v-for="(v,k) in adminKgPanelData" :key="k" class="kurpr"><span>{{ k }}</span><span>{{ typeof v==='object'?'--':v||'--' }}</span></div>
                   </div>
                 </template>
               </div>
@@ -630,9 +654,20 @@ async function deleteRepair(oid){if(!confirm('确定删除？'))return;await del
 .kurp-body{padding:12px 14px;overflow-y:auto;flex:1}
 .kurp-dname{font-size:14px;font-weight:600;color:#2c3e50;margin:0 0 8px}
 .kurp-rows{display:flex;flex-direction:column;gap:6px}
-.kurpr{display:flex;justify-content:space-between;font-size:11px;color:#888}
+.kurpr{display:flex;justify-content:space-between;font-size:11px;color:#888;padding:3px 0}
 .kurpr span:first-child{color:#aaa}
+.kurpr.total{font-weight:600;color:#555}
+.kurpr span.on{color:#67c23a}.kurpr span.off{color:#e74c3c}.kurpr span.warn{color:#e6a23c}
 .c-on{color:#67c23a}.c-off{color:#e74c3c}.c-red{color:#e74c3c}
+/* admin panel enhanced */
+.kurp-sec{margin-top:12px}
+.kurp-sec-t{font-size:10px;color:#888;margin-bottom:4px;padding-bottom:3px;border-bottom:1px solid #f0f2f5}
+.kurp-badge-s{display:inline-block;padding:2px 10px;border-radius:10px;font-size:10px;color:#fff;margin-bottom:8px}
+.kurp-metrics{display:flex;gap:6px;margin-bottom:10px}
+.kurpm{flex:1;text-align:center;padding:6px 4px;background:#f8f9fb;border-radius:6px}
+.kurpm-val{font-size:14px;font-weight:700;color:#2c3e50}
+.kurpm-val.on{color:#67c23a}.kurpm-val.off{color:#e74c3c}
+.kurpm-lbl{font-size:9px;color:#bbb;margin-top:1px}
 /* left card */
 .kul-avatar-section{background:#fff;border:1px solid #edf0f4;border-radius:8px;padding:12px;text-align:center}
 .kul-avatar{width:44px;height:44px;border-radius:50%;background:#5470c6;color:#fff;font-size:20px;font-weight:600;line-height:44px;margin:0 auto 6px}

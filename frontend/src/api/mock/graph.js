@@ -20,8 +20,14 @@ function calcDamagePred(dev, dtype) {
   const prob = parseFloat(dev.damage_probability || 0)
   const years = parseFloat(dev.usage_years || 0)
   const lifespan = dtype?.expected_lifespan_years || 10
-  const remain = Math.max(0, lifespan - years)
-  return { now: prob, next2: Math.min(1, prob + 0.15), lifespan, remain: Math.round(remain * 10) / 10 }
+  const beta = dtype?.weibull_beta || 2.5
+  const bqf = parseFloat(dev.bqf || 1.0)
+  const eta = lifespan * 1.2 * bqf
+  const next1 = 1 - Math.exp(-Math.pow((years + 1) / eta, beta))
+  const next2 = 1 - Math.exp(-Math.pow((years + 2) / eta, beta))
+  const remain = Math.max(0, Math.round((lifespan - years) * 10) / 10)
+  const est_damage_year = Math.round(lifespan * 1.2 * bqf * Math.pow(-Math.log(1 - 0.8), 1 / beta) * 10) / 10
+  return { now: prob, next1: Math.round(next1 * 1000) / 1000, next2: Math.round(next2 * 1000) / 1000, lifespan, remain, est_damage_year }
 }
 
 function calcStd(values) {
@@ -301,11 +307,21 @@ export function mockGetUserKG(overrideUid) {
     detail: {
       type: 'category', subtype: 'family', name: '家庭信息',
       members: familyMembers.length,
+      cohabit_count: familyMembers.filter(m => m.is_cohabit).length,
+      separate_count: familyMembers.filter(m => !m.is_cohabit).length,
       housing_type: housing ? optLabel('housing_type', housing.housing_type) : '--',
       area: housing ? parseFloat(housing.housing_area) : null,
       bedrooms: housing?.bedroom_count || 0,
       living_rooms: housing?.living_room_count || 0,
+      kitchen: housing?.kitchen_count || 0,
+      bathroom: housing?.bathroom_count || 0,
+      floor: housing?.floor_level || null,
+      total_floors: housing?.total_floors || null,
       elevator: housing?.has_elevator ? '有' : '无',
+      heating: housing ? optLabel('heating', housing.heating_type) : '--',
+      orientation: housing ? optLabel('orientation', housing.orientation) : '--',
+      building_age: housing?.building_age || null,
+      member_list: familyMembers.map(m => ({ name: m.name, relation: { 2: '配偶', 3: '子女', 4: '父母', 5: '岳父母/公婆', 6: '兄弟姐妹', 7: '其他' }[m.relation] || '', cohabit: m.is_cohabit ? '同住' : '分居' })),
     },
   })
   links.push({ source: hid, target: cfId, value: '' })
@@ -320,7 +336,10 @@ export function mockGetUserKG(overrideUid) {
         type: 'member', name: m.name,
         relation: { 2: '配偶', 3: '子女', 4: '父母', 5: '岳父母/公婆', 6: '兄弟姐妹', 7: '其他' }[m.relation] || '',
         cohabit: m.is_cohabit ? '同住' : '分居',
-        occupation: m.occupation ? optLabel('occupation', m.occupation) : '',
+        occupation: m.occupation ? optLabel('occupation', m.occupation) : '--',
+        education: m.education ? optLabel('education', m.education) : '--',
+        age: m.birth_year ? (new Date().getFullYear() - m.birth_year) : null,
+        gender: m.gender ? { 1: '男', 2: '女' }[m.gender] : '--',
       },
     })
     links.push({ source: cfId, target: mid, value: '' })
@@ -336,6 +355,8 @@ export function mockGetUserKG(overrideUid) {
       type: 'category', subtype: 'tags', name: '画像标签',
       energy_level: elLv, energy_color: elColor,
       credit: allBills.some(b => b.warning_flag === 1) ? '较差' : '良好',
+      device_count: deviceCount, family_size: familyMembers.length,
+      income_level: income ? (parseFloat(income.personal_income) > 200000 ? '高收入' : parseFloat(income.personal_income) > 100000 ? '中等收入' : '低收入') : '--',
     },
   })
   links.push({ source: hid, target: ctId, value: '' })

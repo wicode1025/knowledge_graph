@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="传统模型标签 vs 知识语义网络">
+    <mxGraphModel dx="1300" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="950">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Left background container -->
+        <mxCell id="2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="50" width="520" height="840" as="geometry" />
+        </mxCell>
+
+        <!-- Right background container -->
+        <mxCell id="3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="740" y="50" width="520" height="840" as="geometry" />
+        </mxCell>
+
+        <!-- LEFT: Title -->
+        <mxCell id="4" value="传统模型标签" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b85450;strokeColor=#b85450;fontColor=#ffffff;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="140" y="80" width="320" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- LEFT: Subtitle -->
+        <mxCell id="5" value="基于统计特征的单维分类" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontColor=#b85450;fontSize=14;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="140" y="140" width="320" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- LEFT: Separator -->
+        <mxCell id="6" value="" style="endArrow=none;html=1;strokeColor=#b85450;strokeWidth=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="180" y="180" as="sourcePoint" />
+            <mxPoint x="420" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- LEFT: Item 1 -->
+        <mxCell id="7" value="离散标签，孤立无关联" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1;align=left;spacingLeft=15;fontSize=13;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7s" value="标签A/B/C彼此独立，无法表达语义关系" style="text;html=1;strokeColor=none;fillColor=none;align=left;spacingLeft=15;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="85" y="225" width="430" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- LEFT: Item 2 -->
+        <mxCell id="8" value="依赖统计阈值判定" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1;align=left;spacingLeft=15;fontSize=13;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="280" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8s" value="如用电量大于X则为高耗能，刚性分界" style="text;html=1;strokeColor=none;fillColor=none;align=left;spacingLeft=15;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="85" y="305" width="430" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- LEFT: Item 3 -->
+        <mxCell id="9" value="单一维度特征提取" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1;align=left;spacingLeft=15;fontSize=13;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="360" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9s" value="仅看数值大小，忽略行为模式与业务上下文" style="text;html=1;strokeColor=none;fillColor=none;align=left;spacingLeft=15;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="85" y="385" width="430" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- LEFT: Item 4 -->
+        <mxCell id="10" value="静态固化，无法动态演化" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1;align=left;spacingLeft=15;fontSize=13;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="440" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="10s" value="标签一经确定即固定，不随用户行为变化而更新" style="text;html=1;strokeColor=none;fillColor=none;align=left;spacingLeft=15;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="85" y="465" width="430" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- LEFT: Item 5 -->
+        <mxCell id="11" value="缺乏语义理解，无推理能力" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1;align=left;spacingLeft=15;fontSize=13;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="520" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="11s" value="知其标签而不知其为何为此标签" style="text;html=1;strokeColor=none;fillColor=none;align=left;spacingLeft=15;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="85" y="545" width="430" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- LEFT: Arrow down -->
+        <mxCell id="12" value="" style="endArrow=block;html=1;strokeColor=#b85450;strokeWidth=2;endFill=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="610" as="sourcePoint" />
+            <mxPoint x="300" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- LEFT: Summary -->
+        <mxCell id="13" value="知其然，不知其所以然" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b85450;strokeColor=#b85450;fontColor=#ffffff;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="660" width="360" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- LEFT: Summary sub -->
+        <mxCell id="14" value="仅能回答「是什么」，无法解释「为什么」和「会怎样」" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontColor=#b85450;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="715" width="400" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- RIGHT: Title -->
+        <mxCell id="15" value="知识语义网络" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="80" width="320" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- RIGHT: Subtitle -->
+        <mxCell id="16" value="基于知识图谱的语义推理" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontColor=#6c8ebf;fontSize=14;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="840" y="140" width="320" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- RIGHT: Separator -->
+        <mxCell id="17" value="" style="endArrow=none;html=1;strokeColor=#6c8ebf;strokeWidth=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="880" y="180" as="sourcePoint" />
+            <mxPoint x="1120" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- RIGHT: Item 1 -->
+        <mxCell id="18" value="实体-关系-属性三元组，形成语义网络" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;align=left;spacingLeft=15;fontSize=13;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="200" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="18s" value="用户、设备、行为通过关系边连接，构成可推理的知识图谱" style="text;html=1;strokeColor=none;fillColor=none;align=left;spacingLeft=15;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="785" y="225" width="430" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- RIGHT: Item 2 -->
+        <mxCell id="19" value="融合多源知识进行综合判定" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;align=left;spacingLeft=15;fontSize=13;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="280" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="19s" value="整合用电数据、工单信息、设备参数、行为模式等多维特征" style="text;html=1;strokeColor=none;fillColor=none;align=left;spacingLeft=15;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="785" y="305" width="430" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- RIGHT: Item 3 -->
+        <mxCell id="20" value="多维度关联分析" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;align=left;spacingLeft=15;fontSize=13;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="360" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="20s" value="时间维度 x 行为维度 x 设备维度 x 业务维度，交叉关联" style="text;html=1;strokeColor=none;fillColor=none;align=left;spacingLeft=15;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="785" y="385" width="430" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- RIGHT: Item 4 -->
+        <mxCell id="21" value="动态演化，持续学习更新" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;align=left;spacingLeft=15;fontSize=13;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="440" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="21s" value="随数据积累自动更新节点属性与关系权重，实时反映用户状态" style="text;html=1;strokeColor=none;fillColor=none;align=left;spacingLeft=15;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="785" y="465" width="430" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- RIGHT: Item 5 -->
+        <mxCell id="22" value="具备因果推理与逻辑推断能力" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;align=left;spacingLeft=15;fontSize=13;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="520" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="22s" value="通过图遍历与路径推理，回答「为何」及「将如何」" style="text;html=1;strokeColor=none;fillColor=none;align=left;spacingLeft=15;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="785" y="545" width="430" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- RIGHT: Arrow down -->
+        <mxCell id="23" value="" style="endArrow=block;html=1;strokeColor=#6c8ebf;strokeWidth=2;endFill=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1000" y="610" as="sourcePoint" />
+            <mxPoint x="1000" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- RIGHT: Summary -->
+        <mxCell id="24" value="既知其然，亦知其所以然" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="660" width="360" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- RIGHT: Summary sub -->
+        <mxCell id="25" value="不仅能回答「是什么」，更能解释「为什么」和预测「会怎样」" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontColor=#6c8ebf;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="800" y="715" width="400" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- CENTER: VS circle -->
+        <mxCell id="26" value="VS" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=3;fontSize=28;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="590" y="420" width="100" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- CENTER: Left arrow -->
+        <mxCell id="27" value="" style="endArrow=classic;html=1;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="460" as="sourcePoint" />
+            <mxPoint x="490" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CENTER: Right arrow -->
+        <mxCell id="28" value="" style="endArrow=classic;html=1;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="690" y="460" as="sourcePoint" />
+            <mxPoint x="790" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- TOP: Main title -->
+        <mxCell id="29" value="传统模型标签    vs    知识语义网络" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=18;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="10" width="580" height="30" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

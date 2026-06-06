@@ -92,33 +92,144 @@
               <button class="ph-close" @click="panelOpen = false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
             <div class="panel-body" v-if="panelData">
+              <!-- ====== 用户中心 ====== -->
               <template v-if="panelData.type === 'user'">
                 <h3 class="pb-title">{{ panelData.name }}</h3>
-                <div class="pb-rows"><div v-for="(v,k) in panelData.info" :key="k" v-show="v&&v!=='--'" class="pbr"><span>{{ k }}</span><span>{{ v }}</span></div></div>
-              </template>
-              <template v-else-if="panelData.type === 'category'">
-                <h3 class="pb-title">{{ panelData.name }}</h3>
-                <div class="pb-metrics">
-                  <div v-if="panelData.total !== undefined" class="pbm"><div class="pbm-val">{{ panelData.total }}</div><div class="pbm-lbl">总数</div></div>
-                  <div v-if="panelData.active !== undefined" class="pbm"><div class="pbm-val on">{{ panelData.active }}</div><div class="pbm-lbl">运行</div></div>
-                  <div v-if="panelData.paid !== undefined" class="pbm"><div class="pbm-val on">{{ panelData.paid }}</div><div class="pbm-lbl">已缴</div></div>
+                <span class="pb-badge-s" :style="{background: panelData.energy?.color||'#999'}">{{ panelData.energy?.level||'--' }}</span>
+                <div class="pb-sec"><div class="pb-sec-t">基本信息</div>
+                  <div class="pb-rows"><div class="pbr"><span>性别</span><span>{{ panelData.info?.gender||'--' }}</span></div><div class="pbr"><span>出生年月</span><span>{{ panelData.info?.birth||'--' }}</span></div><div class="pbr"><span>学历</span><span>{{ panelData.info?.education||'--' }}</span></div><div class="pbr"><span>婚姻状况</span><span>{{ panelData.info?.marital||'--' }}</span></div><div class="pbr"><span>职业</span><span>{{ panelData.info?.occupation||'--' }}</span></div><div class="pbr"><span>工作单位</span><span>{{ panelData.info?.work_unit||'--' }}</span></div><div class="pbr"><span>联系电话</span><span>{{ panelData.info?.phone||'--' }}</span></div><div class="pbr"><span>城乡分类</span><span>{{ panelData.info?.urban||'--' }}</span></div><div class="pbr"><span>日常作息</span><span>{{ panelData.info?.schedule||'--' }}</span></div><div class="pbr"><span>健康自评</span><span>{{ panelData.info?.health||'--' }}</span></div><div class="pbr"><span>详细地址</span><span>{{ panelData.info?.address||'--' }}</span></div></div>
                 </div>
-                <div v-if="panelData.pie_data" class="pb-mini-chart" ref="pieChart"></div>
-                <div v-if="panelData.trend" class="pb-mini-chart" ref="trendChart"></div>
-                <div v-if="panelData.radar" class="pb-mini-chart" ref="radarChart"></div>
-                <p class="pb-hint mt12">双击展开/折叠</p>
+                <div class="pb-sec" v-if="panelData.housing"><div class="pb-sec-t">住房信息</div>
+                  <div class="pb-rows"><div class="pbr"><span>住房类型</span><span>{{ panelData.housing.type||'--' }}</span></div><div class="pbr"><span>建筑面积</span><span>{{ panelData.housing.area ? panelData.housing.area+' m²' : '--' }}</span></div><div class="pbr"><span>户型</span><span>{{ panelData.housing.bedroom||0 }}室{{ panelData.housing.living||0 }}厅</span></div><div class="pbr"><span>楼层</span><span>{{ panelData.housing.floor||'--' }}/{{ panelData.housing.total_floors||'--' }}层</span></div><div class="pbr"><span>电梯</span><span>{{ panelData.housing.elevator ? '有' : '无' }}</span></div><div class="pbr"><span>供暖方式</span><span>{{ panelData.housing.heating||'--' }}</span></div><div class="pbr"><span>房屋朝向</span><span>{{ panelData.housing.orientation||'--' }}</span></div><div class="pbr"><span>房龄</span><span>{{ panelData.housing.building_age ? panelData.housing.building_age + '年' : '--' }}</span></div></div>
+                </div>
+                <div class="pb-sec" v-if="panelData.income"><div class="pb-sec-t">收入信息</div>
+                  <div class="pb-rows"><div class="pbr"><span>个人年收入</span><span>{{ panelData.income.personal ? '¥'+panelData.income.personal.toLocaleString() : '--' }}</span></div><div class="pbr"><span>家庭年收入</span><span>{{ panelData.income.household ? '¥'+panelData.income.household.toLocaleString() : '--' }}</span></div><div class="pbr"><span>收入来源</span><span>{{ panelData.income.source||'--' }}</span></div><div class="pbr"><span>经济自评</span><span>{{ panelData.income.self_rating ? '★'.repeat(panelData.income.self_rating)+'☆'.repeat(5-panelData.income.self_rating) : '--' }}</span></div></div>
+                </div>
+                <div class="pb-sec"><div class="pb-sec-t">用电概况</div>
+                  <div class="pb-rows"><div class="pbr"><span>能耗等级</span><span :style="{color: panelData.energy?.color}">{{ panelData.energy?.level||'--' }}</span></div><div class="pbr"><span>月均用电</span><span>{{ panelData.energy?.avg_kwh ? panelData.energy.avg_kwh+' kWh' : '--' }}</span></div><div class="pbr"><span>设备总数</span><span>{{ panelData.stats?.devices||0 }} 台</span></div><div class="pbr"><span>正常运行</span><span class="on">{{ panelData.stats?.active||0 }} 台</span></div><div class="pbr"><span>已损坏</span><span class="off">{{ panelData.stats?.damaged||0 }} 台</span></div></div>
+                </div>
+                <div class="pb-sec"><div class="pb-sec-t">缴费概况</div>
+                  <div class="pb-rows"><div class="pbr"><span>账单总数</span><span>{{ panelData.stats?.bills||0 }} 张</span></div><div class="pbr"><span>已缴</span><span class="on">{{ panelData.stats?.paid||0 }} 张</span></div><div class="pbr"><span>未缴</span><span class="off">{{ (panelData.stats?.bills||0)-(panelData.stats?.paid||0) }} 张</span></div></div>
+                </div>
+                <div class="pb-sec" v-if="panelData.members?.length"><div class="pb-sec-t">家庭成员</div>
+                  <div v-for="m in panelData.members" :key="m.name" class="pbr"><span>{{ m.relation||'--' }}</span><span>{{ m.name }}{{ m.cohabit ? '·同住' : '·分居' }}</span></div>
+                </div>
               </template>
+
+              <!-- ====== 设备管理大类 ====== -->
+              <template v-else-if="panelData.subtype === 'devices'">
+                <h3 class="pb-title">设备管理</h3>
+                <div class="pb-metrics"><div class="pbm"><div class="pbm-val">{{ panelData.total||0 }}</div><div class="pbm-lbl">总数</div></div><div class="pbm"><div class="pbm-val on">{{ panelData.active||0 }}</div><div class="pbm-lbl">运行中</div></div><div class="pbm"><div class="pbm-val off">{{ panelData.damaged||0 }}</div><div class="pbm-lbl">损坏</div></div></div>
+                <div v-if="panelData.pie_data" class="pb-mini-chart" ref="pieChart"></div>
+                <div v-if="panelData.high_risk?.length" class="pb-sec"><div class="pb-sec-t">高风险设备</div>
+                  <div v-for="r in panelData.high_risk" :key="r.name" class="pbr"><span>{{ r.name }}</span><span :class="r.prob>0.5?'off':r.prob>0.3?'warn':''">{{ (r.prob*100).toFixed(1) }}%</span></div>
+                </div>
+                <p class="pb-hint mt12">双击展开设备列表</p>
+              </template>
+
+              <!-- ====== 用电特征大类 ====== -->
+              <template v-else-if="panelData.subtype === 'energy'">
+                <h3 class="pb-title">用电特征</h3>
+                <span class="pb-badge-s" :style="{background: panelData.level_color||'#999'}">{{ panelData.level||'--' }}</span>
+                <div class="pb-sec"><div class="pb-sec-t">用电统计</div>
+                  <div class="pb-rows"><div class="pbr"><span>月均用电</span><span>{{ panelData.avg_kwh||0 }} kWh</span></div><div class="pbr"><span>累计用电</span><span>{{ (panelData.total_kwh||0).toLocaleString() }} kWh</span></div><div class="pbr"><span>统计月份</span><span>{{ panelData.months||0 }} 个月</span></div></div>
+                </div>
+                <div class="pb-sec"><div class="pb-sec-t">波动分析</div>
+                  <div class="pb-rows"><div class="pbr"><span>标准差</span><span>{{ panelData.std_kwh||0 }}</span></div><div class="pbr"><span>最大月</span><span>{{ panelData.max_month||0 }} kWh</span></div><div class="pbr"><span>最小月</span><span>{{ panelData.min_month||0 }} kWh</span></div><div class="pbr"><span>峰谷差</span><span>{{ ((panelData.max_month||0)-(panelData.min_month||0)).toFixed(1) }} kWh</span></div></div>
+                </div>
+                <div v-if="panelData.trend" class="pb-mini-chart" ref="trendChart"></div>
+              </template>
+
+              <!-- ====== 账单记录大类 ====== -->
+              <template v-else-if="panelData.subtype === 'bills'">
+                <h3 class="pb-title">账单记录</h3>
+                <div class="pb-metrics"><div class="pbm"><div class="pbm-val">{{ panelData.total||0 }}</div><div class="pbm-lbl">总数</div></div><div class="pbm"><div class="pbm-val on">{{ panelData.paid||0 }}</div><div class="pbm-lbl">已缴</div></div><div class="pbm"><div class="pbm-val off">{{ panelData.unpaid||0 }}</div><div class="pbm-lbl">未缴</div></div></div>
+                <div class="pb-sec"><div class="pb-sec-t">费用汇总</div>
+                  <div class="pb-rows"><div class="pbr"><span>总费用</span><span>¥{{ panelData.total_cost||0 }}</span></div><div class="pbr"><span>维修费</span><span>¥{{ panelData.repair_cost||0 }}</span></div><div class="pbr"><span>缴费率</span><span>{{ panelData.pay_rate||0 }}%</span></div><div class="pbr"><span>信用状态</span><span :class="panelData.credit==='良好'?'on':'off'">{{ panelData.credit||'--' }}</span></div></div>
+                </div>
+                <div v-if="panelData.trend?.length" class="pb-sec"><div class="pb-sec-t">近期账单</div>
+                  <div v-for="b in panelData.trend" :key="b.month" class="pbr"><span>{{ b.month }}</span><span>{{ b.cost ? '¥'+b.cost : '--' }}<span :class="b.status==='已缴'?'on ml':'off ml'">{{ b.status }}</span></span></div>
+                </div>
+                <p class="pb-hint mt12">双击展开账单明细</p>
+              </template>
+
+              <!-- ====== 家庭信息大类 ====== -->
+              <template v-else-if="panelData.subtype === 'family'">
+                <h3 class="pb-title">家庭信息</h3>
+                <div class="pb-metrics"><div class="pbm"><div class="pbm-val">{{ panelData.members||0 }}</div><div class="pbm-lbl">成员</div></div><div class="pbm"><div class="pbm-val on">{{ panelData.cohabit_count||0 }}</div><div class="pbm-lbl">同住</div></div><div class="pbm"><div class="pbm-val" style="color:#999">{{ panelData.separate_count||0 }}</div><div class="pbm-lbl">分居</div></div></div>
+                <div class="pb-sec"><div class="pb-sec-t">住房信息</div>
+                  <div class="pb-rows"><div class="pbr"><span>住房类型</span><span>{{ panelData.housing_type||'--' }}</span></div><div class="pbr"><span>建筑面积</span><span>{{ panelData.area ? panelData.area+' m²' : '--' }}</span></div><div class="pbr"><span>卧室</span><span>{{ panelData.bedrooms||0 }} 间</span></div><div class="pbr"><span>客厅</span><span>{{ panelData.living_rooms||0 }} 间</span></div><div class="pbr"><span>厨房</span><span>{{ panelData.kitchen||0 }} 间</span></div><div class="pbr"><span>卫生间</span><span>{{ panelData.bathroom||0 }} 间</span></div><div class="pbr"><span>电梯</span><span>{{ panelData.elevator||'--' }}</span></div><div class="pbr"><span>楼层</span><span>{{ panelData.floor||'--' }}/{{ panelData.total_floors||'--' }}</span></div><div class="pbr"><span>供暖</span><span>{{ panelData.heating||'--' }}</span></div><div class="pbr"><span>朝向</span><span>{{ panelData.orientation||'--' }}</span></div><div class="pbr"><span>房龄</span><span>{{ panelData.building_age ? panelData.building_age+'年' : '--' }}</span></div></div>
+                </div>
+                <div v-if="panelData.member_list?.length" class="pb-sec"><div class="pb-sec-t">核心成员</div>
+                  <div v-for="m in panelData.member_list" :key="m.name" class="pbr"><span>{{ m.relation||'--' }}</span><span>{{ m.name }} · {{ m.cohabit||'--' }}</span></div>
+                </div>
+              </template>
+
+              <!-- ====== 画像标签大类 ====== -->
+              <template v-else-if="panelData.subtype === 'tags'">
+                <h3 class="pb-title">画像标签</h3>
+                <div class="pb-sec"><div class="pb-sec-t">画像评价</div>
+                  <div class="pb-rows"><div class="pbr"><span>能耗等级</span><span :style="{color: panelData.energy_color}">{{ panelData.energy_level||'--' }}</span></div><div class="pbr"><span>缴费信用</span><span :class="panelData.credit==='良好'?'on':'off'">{{ panelData.credit||'--' }}</span></div><div class="pbr"><span>设备规模</span><span>{{ panelData.device_count||0 }} 台</span></div><div class="pbr"><span>家庭规模</span><span>{{ panelData.family_size||0 }} 人</span></div><div class="pbr"><span>收入水平</span><span>{{ panelData.income_level||'--' }}</span></div></div>
+                </div>
+              </template>
+
+              <!-- ====== 设备节点 ====== -->
               <template v-else-if="panelData.type === 'device'">
                 <h3 class="pb-title">{{ panelData.name }}</h3>
-                <span class="pb-badge" :class="panelData.is_active?'on':'off'">{{ panelData.is_active?'运行中':'已损坏' }}</span>
-                <div class="pb-rows"><div class="pbr"><span>功率</span><span>{{ panelData.power }} W</span></div><div class="pbr"><span>年限</span><span>{{ panelData.usage_years?.toFixed(1) }}年</span></div><div class="pbr"><span>损坏率</span><span :class="panelData.damage_prob>0.5?'text-red':''">{{ (panelData.damage_prob*100).toFixed(1) }}%</span></div></div>
+                <span class="pb-badge-s" :class="panelData.is_active?'on':'off'">{{ panelData.is_active?'正常运行':'已损坏' }}</span>
+                <div class="pb-sec"><div class="pb-sec-t">基本信息</div>
+                  <div class="pb-rows"><div class="pbr"><span>设备类别</span><span>{{ panelData.category||'--' }}</span></div><div class="pbr"><span>品牌</span><span>{{ panelData.brand||'--' }}</span></div><div class="pbr"><span>额定功率</span><span>{{ panelData.rated_power||0 }} W</span></div><div class="pbr"><span>有效功率</span><span>{{ panelData.power||0 }} W</span></div></div>
+                </div>
+                <div class="pb-sec"><div class="pb-sec-t">运行数据</div>
+                  <div class="pb-rows"><div class="pbr"><span>使用年限</span><span>{{ panelData.usage_years?.toFixed?.(1)||panelData.usage_years||0 }} 年</span></div><div class="pbr"><span>预期寿命</span><span>{{ panelData.lifespan||10 }} 年</span></div><div class="pbr"><span>剩余寿命</span><span>{{ panelData.damage_pred?.remain||0 }} 年</span></div><div class="pbr"><span>日均时长</span><span>{{ panelData.hours||0 }} 小时</span></div><div class="pbr"><span>使用习惯</span><span>{{ panelData.habit||'--' }}</span></div></div>
+                </div>
+                <div class="pb-sec"><div class="pb-sec-t">损坏评估</div>
+                  <div class="pb-rows"><div class="pbr"><span>当前损坏率</span><span :class="panelData.damage_prob>0.8?'off':panelData.damage_prob>0.5?'warn':''">{{ ((panelData.damage_prob||0)*100).toFixed(1) }}%</span></div><div class="pbr"><span>1年后预测</span><span :class="(panelData.damage_pred?.next1||0)>0.8?'off':(panelData.damage_pred?.next1||0)>0.5?'warn':''">{{ ((panelData.damage_pred?.next1||0)*100).toFixed(1) }}%</span></div><div class="pbr"><span>2年后预测</span><span :class="(panelData.damage_pred?.next2||0)>0.8?'off':(panelData.damage_pred?.next2||0)>0.5?'warn':''">{{ ((panelData.damage_pred?.next2||0)*100).toFixed(1) }}%</span></div><div class="pbr"><span>预计损坏年</span><span>约 {{ panelData.damage_pred?.est_damage_year||'--' }} 年</span></div></div>
+                </div>
                 <div v-if="panelData.monthly_kwh?.length" class="pb-mini-chart" ref="deviceKwhChart"></div>
               </template>
+
+              <!-- ====== 账单节点 ====== -->
               <template v-else-if="panelData.type === 'bill'">
                 <h3 class="pb-title">{{ panelData.month }}</h3>
-                <span class="pb-badge" :class="panelData.status==='已缴'?'on':'off'">{{ panelData.status }}</span>
-                <div class="pb-rows"><div class="pbr"><span>用电</span><span>{{ panelData.kwh }} kWh</span></div><div class="pbr"><span>电费</span><span>¥{{ panelData.elec_cost }}</span></div><div class="pbr total"><span>合计</span><span>¥{{ panelData.total }}</span></div></div>
+                <span class="pb-badge-s" :class="panelData.status==='已缴'?'on':'off'">{{ panelData.status }}</span>
+                <div class="pb-sec"><div class="pb-sec-t">账单信息</div>
+                  <div class="pb-rows"><div class="pbr"><span>用电量</span><span>{{ panelData.kwh||0 }} kWh</span></div><div class="pbr"><span>电价</span><span>¥{{ panelData.unit_price||'0.55' }}/度</span></div><div class="pbr"><span>电费</span><span>¥{{ panelData.elec_cost||0 }}</span></div><div class="pbr"><span>维修费</span><span>¥{{ panelData.repair_cost||0 }}</span></div><div class="pbr total"><span>合计</span><span>¥{{ panelData.total||0 }}</span></div></div>
+                </div>
+                <div class="pb-sec"><div class="pb-sec-t">缴费状态</div>
+                  <div class="pb-rows"><div class="pbr"><span>缴费日期</span><span>{{ panelData.paid_date||'--' }}</span></div><div class="pbr"><span>截止日期</span><span>{{ panelData.due_date||'--' }}</span></div><div class="pbr"><span>欠费警告</span><span :class="panelData.warning?'off':'on'">{{ panelData.warning?'是':'否' }}</span></div></div>
+                </div>
               </template>
+
+              <!-- ====== 标签/能耗节点 ====== -->
+              <template v-else-if="panelData.type === 'tag'">
+                <h3 class="pb-title">{{ panelData.name }}</h3>
+                <div class="pb-rows"><div class="pbr"><span>标签值</span><span :style="{color: energyLabelColor(panelData.value)}">{{ panelData.value||'--' }}</span></div><div v-if="panelData.avg_kwh" class="pbr"><span>月均用电</span><span>{{ panelData.avg_kwh }} kWh</span></div></div>
+                <div class="pb-sec mt12"><div class="pb-sec-t">等级划分</div>
+                  <div class="pbr"><span class="on">节能型</span><span>≤ 100 kWh</span></div>
+                  <div class="pbr"><span style="color:#5470c6">普通型</span><span>100 ~ 500 kWh</span></div>
+                  <div class="pbr"><span class="off">高耗能型</span><span>> 500 kWh</span></div>
+                </div>
+              </template>
+
+              <!-- ====== 月度用电节点 ====== -->
+              <template v-else-if="panelData.type === 'kwh'">
+                <h3 class="pb-title">{{ panelData.name||'用电统计' }}</h3>
+                <div class="pb-sec"><div class="pb-sec-t">统计数据</div>
+                  <div class="pb-rows"><div v-if="panelData.avg_kwh" class="pbr"><span>月均用电</span><span>{{ panelData.avg_kwh }} kWh</span></div><div v-if="panelData.total_kwh" class="pbr"><span>累计用电</span><span>{{ panelData.total_kwh.toLocaleString() }} kWh</span></div><div v-if="panelData.months" class="pbr"><span>统计月份</span><span>{{ panelData.months }} 个月</span></div><div v-if="panelData.max" class="pbr"><span>最大月</span><span>{{ panelData.max }} kWh</span></div><div v-if="panelData.min" class="pbr"><span>最小月</span><span>{{ panelData.min }} kWh</span></div><div v-if="panelData.month" class="pbr"><span>月份</span><span>{{ panelData.month }}</span></div><div v-if="panelData.value" class="pbr"><span>用电量</span><span>{{ panelData.value }} kWh</span></div></div>
+                </div>
+                <div v-if="panelData.trend" class="pb-mini-chart" ref="trendChart"></div>
+              </template>
+
+              <!-- ====== 家庭成员节点 ====== -->
+              <template v-else-if="panelData.type === 'member'">
+                <h3 class="pb-title">{{ panelData.name }}</h3>
+                <div class="pb-sec"><div class="pb-sec-t">基本信息</div>
+                  <div class="pb-rows"><div class="pbr"><span>关系</span><span>{{ panelData.relation||'--' }}</span></div><div class="pbr"><span>同住状态</span><span>{{ panelData.cohabit||'--' }}</span></div><div class="pbr"><span>职业</span><span>{{ panelData.occupation||'--' }}</span></div><div class="pbr"><span>学历</span><span>{{ panelData.education||'--' }}</span></div><div class="pbr"><span>年龄</span><span>{{ panelData.age ? panelData.age + '岁' : '--' }}</span></div><div class="pbr"><span>性别</span><span>{{ panelData.gender||'--' }}</span></div></div>
+                </div>
+              </template>
+
+              <!-- ====== 旧 housing/member 兼容 ====== -->
               <template v-else-if="panelData.type === 'housing'">
                 <h3 class="pb-title">住房</h3>
                 <div class="pb-rows"><div class="pbr"><span>类型</span><span>{{ panelData.housing_type }}</span></div><div class="pbr"><span>面积</span><span>{{ panelData.area }} m²</span></div><div class="pbr"><span>楼层</span><span>{{ panelData.floor }}/{{ panelData.total_floors }}</span></div><div class="pbr"><span>供暖</span><span>{{ panelData.heating }}</span></div></div>
@@ -168,6 +279,7 @@ function optLabel(cat, val) {
   return found ? found.item_value : String(val)
 }
 function elColor(lv) { return {'节能型':'#67c23a','普通型':'#5470c6','摆渡型':'#e6a23c','高耗能型':'#e74c3c'}[lv]||'#999' }
+function energyLabelColor(v) { return {'节能型':'#67c23a','普通型':'#5470c6','高耗能型':'#e74c3c'}[v]||'#999' }
 
 onMounted(async () => {
   try {
@@ -347,4 +459,11 @@ function renderMiniCharts(){
 .pbr.total{font-weight:600}
 .text-red{color:#ff4d4f!important}
 .pb-mini-chart{width:100%;height:90px}
+/* 节点详情面板增强 */
+.pb-sec{margin-top:14px}
+.pb-sec-t{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;padding-bottom:4px;border-bottom:1px solid #f0f2f5}
+.pb-badge-s{display:inline-block;padding:2px 10px;border-radius:10px;font-size:10px;color:#fff;margin-bottom:10px}
+.pb-badge-s.on{background:#67c23a}.pb-badge-s.off{background:#e74c3c}
+.pbr span.on{color:#67c23a}.pbr span.off{color:#e74c3c}.pbr span.warn{color:#e6a23c}
+.pbr span.ml{margin-left:8px}
 </style>
