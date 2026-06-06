@@ -121,7 +121,8 @@ async function handleLogin() {
       localStorage.setItem('user', JSON.stringify(user))
       localStorage.setItem('role', user.role)
       localStorage.setItem('elec_user_id', user.elec_user_id || '')
-      window.location.href = user.role === 'admin' ? '/#/admin' : '/#/'
+      // 用 location.replace 避免浏览器缓存导致的导航栏角色错乱
+      window.location.replace(user.role === 'admin' ? '/#/admin' : '/#/')
     }
   } catch (err) {
     error.value = err.response?.data?.message || '用户名或密码错误'

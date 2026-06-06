@@ -57,19 +57,20 @@ const hideNav = computed(() => route.meta.hideNav)
 function getRole() { return localStorage.getItem('role') || 'user' }
 function getUserName() { try { return JSON.parse(localStorage.getItem('user')||'{}').username } catch { return '' } }
 
-const userRole = ref('user')
-const savedUser = ref('')
+// 关键：在 setup 阶段同步读取 localStorage，不依赖异步回调
+const userRole = ref(getRole())
+const savedUser = ref(getUserName())
 const roleText = computed(() => userRole.value === 'admin' ? '管理员' : '家庭用户')
 
-// 路由守卫在每次导航前读取 localStorage 角色
+// 路由守卫双重保障
 router.beforeEach((to) => {
   userRole.value = getRole()
   savedUser.value = getUserName()
-  // admin 路由只有管理员能访问
   if (to.meta.role === 'admin' && userRole.value !== 'admin') return '/'
   return true
 })
 
+// onMounted 兜底保障
 onMounted(() => {
   userRole.value = getRole()
   savedUser.value = getUserName()
@@ -80,7 +81,7 @@ function handleLogout() {
   localStorage.removeItem('user')
   localStorage.removeItem('role')
   localStorage.removeItem('elec_user_id')
-  window.location.href = '/#/login'
+  window.location.replace('/#/login')
 }
 </script>
 
