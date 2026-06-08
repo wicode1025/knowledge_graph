@@ -153,7 +153,7 @@
                     <div class="brand-select-wrap">
                       <select v-model="form.brand_choice" class="f-input">
                         <option value="">请选择品牌</option>
-                        <option v-for="b in selDetail?.brands" :key="b.name" :value="b.name">{{ b.name }}</option>
+                        <option v-for="b in (selDetail?.brands||[])" :key="b.brand_name||b.name" :value="b.brand_name||b.name">{{ b.brand_name||b.name }}</option>
                       </select>
                     </div>
                   </div>
@@ -177,10 +177,10 @@
                 <div class="form-group full">
                   <label>使用习惯</label>
                   <div class="habit-options">
-                    <div v-for="h in selDetail?.habits" :key="h.id"
-                      :class="['habit-chip', { selected: form.usage_habit_id === h.id }]"
-                      @click="form.usage_habit_id = h.id">
-                      {{ h.name }}
+                    <div v-for="h in (selDetail?.usage_habits||selDetail?.habits||[])" :key="h.habit_id||h.id"
+                      :class="['habit-chip', { selected: form.usage_habit_id === (h.habit_id||h.id) }]"
+                      @click="form.usage_habit_id = h.habit_id||h.id">
+                      {{ h.habit_name||h.name }}
                     </div>
                   </div>
                 </div>
@@ -254,8 +254,9 @@ const sysMonth = ref(1)
 
 const habitName = computed(() => {
   if (!selDetail.value || !form.usage_habit_id) return '未选择'
-  const h = selDetail.value.habits.find(x => x.id === form.usage_habit_id)
-  return h ? h.name : '未选择'
+  const habits = selDetail.value.usage_habits || selDetail.value.habits || []
+  const h = habits.find(x => (x.habit_id||x.id) === form.usage_habit_id)
+  return h ? (h.habit_name||h.name) : '未选择'
 })
 
 function meterDash(d) {
@@ -321,19 +322,20 @@ function nextMonthStr(ym) {
 onMounted(loadData)
 
 // 添加向导
-async function loadTypes() { const r = await getDeviceTypes(); cats.value = r.data.categories }
+async function loadTypes() { const r = await getDeviceTypes(); cats.value = r.data.device_types || r.data.categories || {} }
 async function openWizard() { await loadTypes(); showWizard.value = true; wizStep.value = 1 }
 function pickCat(k) { curTypes.value = cats.value[k] || []; wizStep.value = 2 }
 async function pickType(d) {
   selType.value = d
-  const r = await getDeviceTypeDetail(d.type_code)
+  const code = d.device_type_code || d.type_code || d.type_id
+  const r = await getDeviceTypeDetail(code)
   selDetail.value = r.data
-  form.device_type_code = d.type_code
-  form.rated_power = d.default_power
-  form.brand_choice = r.data.brands?.[0]?.name || ''
+  form.device_type_code = code
+  form.rated_power = d.default_power || r.data.device_type?.default_power || 0
+  form.brand_choice = (r.data.brands?.[0]?.brand_name || r.data.brands?.[0]?.name || '')
   form.daily_usage_hours = r.data.device_type?.typical_daily_hours || 1
   form.usage_years = 0
-  form.usage_habit_id = r.data.habits?.[0]?.id || null
+  form.usage_habit_id = (r.data.usage_habits || r.data.habits)?.[0]?.habit_id || null
   wizStep.value = 3
 }
 
